@@ -9,8 +9,12 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<property name="driverClassName" value = "com.mysql.cj.jdbc.Driver"></property>
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/legacyProject?serverTimezone=Asia/Seoul"></property>
+		<!-- <property name="driverClassName" value = "com.mysql.cj.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/legacyProject?serverTimezone=Asia/Seoul"></property> -->
+		
+		<property name="driverClassName" value = "net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost:3306/legacyProject?serverTimezone=Asia/Seoul"></property> 
+		
 		<property name="username" value="root"></property>
 		<property name="password" value="mysql"></property>
 		<property name="maximumPoolSize" value="10"></property>

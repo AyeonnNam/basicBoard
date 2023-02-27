@@ -47,4 +47,15 @@
 		<appender-ref ref="console" />
 	</root>
 
+	<logger name="jdbc.audit">
+		<levle value="warn" />
+	</logger>
+
+	<logger name="jdbc.resultset">
+		<level value="warn" />
+
+		<logger name="jdbc.connection">
+			<level value="warn"></level>
+		</logger>
+	</logger>
 </log4j:configuration>
