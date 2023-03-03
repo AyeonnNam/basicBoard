@@ -17,7 +17,7 @@
 		
 		<property name="username" value="root"></property>
 		<property name="password" value="mysql"></property>
-		<property name="maximumPoolSize" value="10"></property>
+		<!-- <property name="maximumPoolSize" value="10"></property> -->
 		</bean>
 		
 		<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
