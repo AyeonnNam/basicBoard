@@ -47,7 +47,7 @@
 		update tbl_board set title=#{title},
 		content = #{content},
 		writer=#{writer},
-		updateDate = now(),
+		updateDate = now() 
 		where bno = #{bno}
 
 	</update>

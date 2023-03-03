@@ -63,11 +63,22 @@ public class BoardMapperTests {
 //	}
 //	
 //	
+//	@Test
+//	public void testDelete() {
+//		
+//		int delete = mapper.delete(11L);
+//		log.info("지워졌나요 : " +delete);
+//		
+//	}
+//	
 	@Test
-	public void testDelete() {
+	public void testUpdate() {
 		
-		int delete = mapper.delete(11L);
-		log.info("지워졌나요 : " +delete);
+		BoardVO board= mapper.read(10L);
+		board.setContent("압둘라압둘라압둘라압둘라압둘라");
+		
+		log.info(mapper.update(board));
+		
 		
 	}
 
