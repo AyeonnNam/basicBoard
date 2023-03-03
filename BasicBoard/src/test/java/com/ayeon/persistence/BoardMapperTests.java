@@ -37,5 +37,20 @@ public class BoardMapperTests {
 		log.info("insert..............");
 		
 	}
+	
+	@Test
+	public void testInsertSelectKey() {
+		
+		log.info("insertSelectKey..............");
+
+		BoardVO board = new BoardVO();
+		board.setTitle("title01");
+		board.setContent("content01");
+		board.setWriter("ayeon01");
+	
+		mapper.insertSelectKey(board);
+		
+		
+	}
 
 }

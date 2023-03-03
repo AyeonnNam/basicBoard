@@ -22,7 +22,7 @@
 
 		<selectKey keyProperty="bno" order="BEFORE"
 			resultType="long">
-			selet nextval('seq_board') from dual
+			select nextval('seq_board') from dual
 
 		</selectKey>
 
