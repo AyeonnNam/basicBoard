@@ -13,10 +13,10 @@
 	</appender>
 
 	<logger name="com.zaxxer.hikariConfig">
-		<level value="trace"></level>
+		<level value="info"></level>
 	</logger>
 	<logger name="com.zaxxer.hikari">
-		<level value="debug"></level>
+		<level value="info"></level>
 	</logger>
 
 	<!-- Application Loggers -->
