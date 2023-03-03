@@ -9,8 +9,27 @@
 
 	</select>
 
+	<insert id="insert">
+		insert into tbl_board (bno, title, content, writer)
+		values ((select
+		nextval('seq_board') from dual), #{title}, #{content},
+		#{writer})
+
+	</insert>
 
 
+	<insert id="insertSelectKey">
 
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long">
+			selet nextval('seq_board') from dual
+
+		</selectKey>
+
+		insert into tbl_board (bno, title, content, writer)
+		values(#{bno},#{title},#{content},#{writer})
+
+
+	</insert>
 
 </mapper>
