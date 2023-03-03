@@ -52,5 +52,14 @@ public class BoardMapperTests {
 		
 		
 	}
+	
+	
+	@Test
+	public void testRead() {
+		
+		log.info("R......E......A.......D.....");
+		BoardVO read = mapper.read(11L);
+		log.info("...............11번 읽기 :" + read);
+	}
 
 }

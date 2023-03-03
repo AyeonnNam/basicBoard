@@ -31,5 +31,10 @@
 
 
 	</insert>
+	
+	<select id="read" resultType="com.ayeon.domain.BoardVO">
+		select * from tbl_board where bno = #{bno}
+	
+	</select>
 
 </mapper>
