@@ -2,11 +2,15 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.ayeon.mapper.BoardMapper">
-  
-  
-  
-  
-  
-  
-  </mapper>
+<mapper namespace="com.ayeon.mapper.BoardMapper">
+
+	<select id="getList" resultType="com.ayeon.domian.BoardVO">
+  <![CDATA[select * from tbl_board where bno > 0]]>
+
+	</select>
+
+
+
+
+
+</mapper>
