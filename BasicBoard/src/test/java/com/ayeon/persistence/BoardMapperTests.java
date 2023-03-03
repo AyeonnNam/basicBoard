@@ -23,43 +23,52 @@ public class BoardMapperTests {
 	
 	@Setter(onMethod_ = @Autowired)
 	BoardMapper mapper;
-	
-	
+//	
+//	
+//	@Test
+//	public void testInsert() {
+//		BoardVO board = new BoardVO();
+//		board.setTitle("title");
+//		board.setContent("content");
+//		board.setWriter("ayeon");
+//		
+//		mapper.insert(board);
+//		
+//		log.info("insert..............");
+//		
+//	}
+//	
+//	@Test
+//	public void testInsertSelectKey() {
+//		
+//		log.info("insertSelectKey..............");
+//
+//		BoardVO board = new BoardVO();
+//		board.setTitle("title01");
+//		board.setContent("content01");
+//		board.setWriter("ayeon01");
+//	
+//		mapper.insertSelectKey(board);
+//		
+//		
+//	}
+//	
+//	
+//	@Test
+//	public void testRead() {
+//		
+//		log.info("R......E......A.......D.....");
+//		BoardVO read = mapper.read(11L);
+//		log.info("...............11번 읽기 :" + read);
+//	}
+//	
+//	
 	@Test
-	public void testInsert() {
-		BoardVO board = new BoardVO();
-		board.setTitle("title");
-		board.setContent("content");
-		board.setWriter("ayeon");
+	public void testDelete() {
 		
-		mapper.insert(board);
+		int delete = mapper.delete(11L);
+		log.info("지워졌나요 : " +delete);
 		
-		log.info("insert..............");
-		
-	}
-	
-	@Test
-	public void testInsertSelectKey() {
-		
-		log.info("insertSelectKey..............");
-
-		BoardVO board = new BoardVO();
-		board.setTitle("title01");
-		board.setContent("content01");
-		board.setWriter("ayeon01");
-	
-		mapper.insertSelectKey(board);
-		
-		
-	}
-	
-	
-	@Test
-	public void testRead() {
-		
-		log.info("R......E......A.......D.....");
-		BoardVO read = mapper.read(11L);
-		log.info("...............11번 읽기 :" + read);
 	}
 
 }
