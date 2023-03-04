@@ -21,3 +21,6 @@ public interface BoardMapper {
 	
 	public int update(BoardVO board);
 }
+
+
+//BeanCreationException/Failed to load ApplicationContext
