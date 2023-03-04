@@ -50,6 +50,16 @@ public class BoardServiceTests {
 		service.getList().forEach(board-> log.info(board));
 	}
 	
+	@Test
+	public void testUpdate() {
+		BoardVO board = service.get(1L);
+		if(board == null) {
+			return;
+		}
+		
+		board.setTitle("제목 수정........");
+		service.modify(board);
+	}
 	
 
 }
