@@ -15,23 +15,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
 
-	
 	private BoardMapper mapper;
 
 	@Override
 	public void register(BoardVO board) {
 		log.info("register........." + board);
 		mapper.insertSelectKey(board);
-		
+
 	}
 
 	@Override
 	public BoardVO get(Long bno) {
 		// TODO Auto-generated method stub
-		log.info("get............" +bno);
-		return  mapper.read(bno);
+		log.info("get............" + bno);
+		return mapper.read(bno);
 	}
 
 	@Override
@@ -41,17 +40,17 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public boolean modify(BoardVO board) {
-		
+
 		log.info("modify............." + board);
-		 return  mapper.update(board) == 1;
-		
+		return mapper.update(board) == 1;
+
 	}
 
 	@Override
 	public boolean remove(Long bno) {
-		// TODO Auto-generated method stub
-		return false;
+		log.info("delete............." + bno);
+
+		return mapper.delete(bno) == 1;
 	}
-	
-	
+
 }

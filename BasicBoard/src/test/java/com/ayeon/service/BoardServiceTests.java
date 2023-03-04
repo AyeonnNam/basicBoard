@@ -2,6 +2,7 @@ package com.ayeon.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,12 @@ public class BoardServiceTests {
 		
 		board.setTitle("제목 수정........");
 		service.modify(board);
+	}
+	
+	@Test
+	public void testDelete() {
+		
+		log.info("REMOVE RESULT......................: " + service.remove(3L));
 	}
 	
 
