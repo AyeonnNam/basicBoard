@@ -23,4 +23,3 @@ public interface BoardMapper {
 }
 
 
-//BeanCreationException/Failed to load ApplicationContext

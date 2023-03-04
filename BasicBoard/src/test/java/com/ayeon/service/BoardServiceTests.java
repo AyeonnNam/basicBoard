@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ayeon.domain.BoardVO;
+
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -25,5 +27,19 @@ public class BoardServiceTests {
 		
 		assertNotNull(service);
 	}
+	
+	@Test
+	public void testRegister() {
+		BoardVO board = new BoardVO();
+		board.setTitle("아깝다....");
+		board.setContent("자라트위드자켓을 못산것이...");
+		board.setWriter("아요니");
+		service.register(board);
+		
+		log.info("생성된 게시물의 번호: " + board.getBno());
+	}
+	
+	
+	
 
 }
