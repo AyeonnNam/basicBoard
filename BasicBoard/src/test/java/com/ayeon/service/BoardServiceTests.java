@@ -45,6 +45,10 @@ public class BoardServiceTests {
 		
 	}
 	
+	@Test
+	public void testGetList() {
+		service.getList().forEach(board-> log.info(board));
+	}
 	
 	
 
