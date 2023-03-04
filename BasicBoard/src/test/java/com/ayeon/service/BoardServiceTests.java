@@ -28,15 +28,21 @@ public class BoardServiceTests {
 		assertNotNull(service);
 	}
 	
+//	@Test
+//	public void testRegister() {
+//		BoardVO board = new BoardVO();
+//		board.setTitle("아깝다....");
+//		board.setContent("자라트위드자켓을 못산것이...");
+//		board.setWriter("아요니");
+//		service.register(board);
+//		
+//		log.info("생성된 게시물의 번호: " + board.getBno());
+//	}
+	
 	@Test
-	public void testRegister() {
-		BoardVO board = new BoardVO();
-		board.setTitle("아깝다....");
-		board.setContent("자라트위드자켓을 못산것이...");
-		board.setWriter("아요니");
-		service.register(board);
+	public void testGet() {
+		log.info(service.get(1L));
 		
-		log.info("생성된 게시물의 번호: " + board.getBno());
 	}
 	
 	
