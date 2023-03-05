@@ -55,25 +55,32 @@ public class BoardControllerTests {
 //
 //	}
 
-	@Test
-	public void testGet() throws Exception {
-
-		ModelMap modelMap = mockMvc.perform(MockMvcRequestBuilders.get("/board/get").param("bno", "16")).andReturn()
-				.getModelAndView().getModelMap();
-
-		log.info(modelMap);
-	}
-
-	@Test
-	public void testModify() throws Exception {
-
-		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/board/modify").param("bno", "16")
-				.param("title", "고양이는 귀엽다").param("content", "똥카인").param("writer", "아연")).andReturn().getModelAndView()
-				.getViewName();
-
-		log.info(resultPage);
-	}
+//	@Test
+//	public void testGet() throws Exception {
+//
+//		ModelMap modelMap = mockMvc.perform(MockMvcRequestBuilders.get("/board/get").param("bno", "16")).andReturn()
+//				.getModelAndView().getModelMap();
+//
+//		log.info(modelMap);
+//	}
+//
+//	@Test
+//	public void testModify() throws Exception {
+//
+//		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/board/modify").param("bno", "16")
+//				.param("title", "고양이는 귀엽다").param("content", "똥카인").param("writer", "아연")).andReturn().getModelAndView()
+//				.getViewName();
+//
+//		log.info(resultPage);
+//	}
 	
+	@Test
+	public void testDelete() throws Exception{
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/board/delete").param("bno", "16")).andReturn().getModelAndView().getViewName();
+		log.info(resultPage);
+		
+	
+	}
 	
 
 }
