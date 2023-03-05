@@ -24,7 +24,7 @@ public class BoardController {
 		
 		
 		log.info("list...............");
-		model.addAttribute("list",service.getList());
+		model.addAttribute("list", service.getList());
 		
 	}
 	
