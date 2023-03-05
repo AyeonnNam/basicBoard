@@ -30,21 +30,13 @@
         $('#dataTables-example').DataTable({
             responsive: true
         });
+        $(".sidebar-nav")
+    	.attr("class","sidebar-nav navbar-collapse collapse")
+    	.attr("aria-expanded",'false')
+    	.attr("style","height:1px");
     });
     </script>
-<script>
-$(document).ready(function(){
-	
-	$('#dataTables-example').DataTable({responsive: true});
 
-$(".sidebar-nav")
-	.attr("class","sideabr-nav navbar-collapse collapse")
-	.attr("aria-expanded",'false')
-	.attr("style","heigiht:1px");
-});
-
-
-</script>
 </body>
 
 </html>
