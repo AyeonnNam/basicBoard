@@ -10,6 +10,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.context.WebApplicationContext;
 
 import lombok.Setter;
@@ -33,18 +34,43 @@ public class BoardControllerTests {
 
 	}
 
+//	@Test
+//	public void testList() throws Exception {
+//
+//		log.info(mockMvc.perform(MockMvcRequestBuilders.get("/board/list")).andReturn().getModelAndView().getModelMap()
+//
+//		);
+//
+//	}
+//
+//	@Test
+//	public void testRegister() throws Exception {
+//
+//		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/board/register")
+//
+//				.param("title", "테스트새글 제목").param("content", "테스트 새글 내용").param("writer", "작가양반")).andReturn()
+//				.getModelAndView().getViewName();
+//
+//		log.info(resultPage);
+//
+//	}
+
 	@Test
-	public void testList() throws Exception {
-
-		log.info(mockMvc.
-				perform(MockMvcRequestBuilders.
-						get("/board/list"))
-				.andReturn()
-				.getModelAndView()
-				.getModelMap()
-
-		);
-
+	public void testGet() throws Exception {
+		
+		ModelMap modelMap = mockMvc.perform(MockMvcRequestBuilders.get("/board/get").param("bno", "16")).andReturn().getModelAndView()
+				.getModelMap();
+		
+		log.info(modelMap);
 	}
 
+	@Test
+	public void testUpdate() throws Exception{
+		
+		String resultPage = mockMvc.perform(MockMvcRequestBuilders.post("/board/update").param("bno", "16")
+				.param("title","고양이는 귀엽다").param("content", "똥카인").param("writer", "아연")).andReturn().getModelAndView().getViewName();
+	
+	log.info(resultPage);
+	}
+	
 }
