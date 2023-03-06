@@ -15,8 +15,11 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">Board List Page
-			<button id='regBtn' type="button" class="btn btn-xs pull-right">Register New Board</button></div>
+			<div class="panel-heading">
+				Board List Page
+				<button id='regBtn' type="button" class="btn btn-xs pull-right">Register
+					New Board</button>
+			</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 				<table width="100%"
@@ -79,25 +82,25 @@
 <!-- /.row -->
 
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(
+			function() {
 
-		var result = '<c:out value="${result}"/>';
-		checkModal(result);
-		function checkModal(result){
-			
-			if(result === ''){
-				return;
-			}
-			if(parseInt(result)>0){
-				//class
-				$(".modal-body").html("게시글"+parseInt(result)+" 번이 등록되었습니다.");
-			}
-			//id
-			$("#myModal").modal("show");
-		}
-		
-		
+				var result = '<c:out value="${result}"/>';
+				checkModal(result);
+				function checkModal(result) {
 
-	});
+					if (result === '') {
+						return;
+					}
+					if (parseInt(result) > 0) {
+						//class
+						$(".modal-body").html(
+								"게시글" + parseInt(result) + " 번이 등록되었습니다.");
+					}
+					//id
+					$("#myModal").modal("show");
+				}
+
+			});
 </script>
 <%@ include file="../includes/footer.jsp"%>
