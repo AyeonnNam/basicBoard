@@ -30,26 +30,71 @@
 							<th>수정일</th>
 						</tr>
 					</thead>
-					
+
 					<c:forEach items="${list}" var="board">
-					<tr>
-					<td><c:out value="${board.bno}"/></td>
-					<td><c:out value="${board.title}"/></td>
-					<td><c:out value="${board.writer}"/></td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}"/></td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.updatedate }"/></td>
-					</tr>
+						<tr>
+							<td><c:out value="${board.bno}" /></td>
+							<td><c:out value="${board.title}" /></td>
+							<td><c:out value="${board.writer}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd"
+									value="${board.regdate}" /></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd"
+									value="${board.updatedate }" /></td>
+						</tr>
 					</c:forEach>
 
 				</table>
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+							</div>
+							<div class="modal-body">처리가 완료되었습니다.</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Save
+									changes</button>
+
+
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- /.table-responsive -->
 			</div>
-			<!-- /.table-responsive -->
+			<!-- /.panel-body -->
 		</div>
-		<!-- /.panel-body -->
+		<!-- /.panel -->
 	</div>
-	<!-- /.panel -->
-</div>
-<!-- /.col-lg-6 -->
+	<!-- /.col-lg-6 -->
 </div>
 <!-- /.row -->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var result = '<c:out value="${result}"/>';
+		checkModal(result);
+		function checkModal(result){
+			
+			if(result === ''){
+				return;
+			}
+			if(parseInt(result)>0){
+				//class
+				$(".modal-body").html("게시글"+parseInt(result)+" 번이 등록되었습니다.");
+			}
+			//id
+			$("#myModal").modal("show");
+		}
+
+	});
+</script>
 <%@ include file="../includes/footer.jsp"%>
