@@ -88,9 +88,12 @@
 
 				var result = '<c:out value="${result}"/>';
 				checkModal(result);
+				console.log(history.state);
+				history.replaceState({},null,null);
+				
 				function checkModal(result) {
-
-					if (result === '') {
+					//board.bno
+					if (result === ''|| history.state) {
 						return;
 					}
 					if (parseInt(result) > 0) {

@@ -50,7 +50,8 @@ public class BoardController {
 
 	}
 
-	@GetMapping("/get")
+	//수정/삭제가 가능한 화면으로 이동하는 것은 조회와 같다.
+	@GetMapping({"/get","/modify"})
 	public void get(@RequestParam("bno") Long bno, Model model) {
 		log.info("/get......");
 		model.addAttribute("board", service.get(bno));
