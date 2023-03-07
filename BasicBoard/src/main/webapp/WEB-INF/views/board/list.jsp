@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; cahrset=UTF-8"
-	pageEncoding="UTF-8"%>"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE div PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -39,7 +40,8 @@
 						<tr>
 							<td><c:out value="${board.bno}" /></td>
 							<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'>
-							<c:out value="${board.title}" /></a></td>
+									<c:out value="${board.title}" />
+							</a></td>
 							<td><c:out value="${board.writer}" /></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.regdate}" /></td>
@@ -89,11 +91,11 @@
 				var result = '<c:out value="${result}"/>';
 				checkModal(result);
 				console.log(history.state);
-				history.replaceState({},null,null);
-				
+				history.replaceState({}, null, null);
+
 				function checkModal(result) {
 					//board.bno
-					if (result === ''|| history.state) {
+					if (result === '' || history.state) {
 						return;
 					}
 					if (parseInt(result) > 0) {
