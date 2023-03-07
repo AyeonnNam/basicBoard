@@ -17,6 +17,10 @@
 			<div class="panel-body"></div>
 			<form role="form" action="/board/modify" method="post">
 				<div class="form-group">
+					<label>Bno</label> <input class="form-control" name='bno'
+						value='<c:out value="${board.bno}"/>' readonly="readonly">
+				</div>
+				<div class="form-group">
 					<label>Title</label> <input class="form-control" name='title'
 						value='<c:out value="${board.title}"/>'>
 				</div>
@@ -62,7 +66,7 @@
 			var operation = $(this).data("oper");
 			console.log(operation);
 			
-			if(opertaion === 'remove'){
+			if(operation === 'remove'){
 				formObj.attr("action","/board/remove");
 			}else if(operation==='list'){
 				self.location="/board/list";
