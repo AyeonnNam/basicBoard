@@ -14,7 +14,7 @@
      , t.*
   FROM ( SELECT @ROWNUM := 0) As R
      , tbl_board t 
- where @rownum <=20 ORDER BY bno DESC) AS I where @rownum > 10;
+ where @rownum <=#{pageNum} * #{amount} ORDER BY bno DESC) AS I where @rownum > (#{pageNum}-1) *#{amount};
 	
 	
 	
