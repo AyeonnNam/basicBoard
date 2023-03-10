@@ -1,5 +1,9 @@
 package com.ayeon.persistence;
 
+import static org.hamcrest.CoreMatchers.both;
+
+import java.util.List;
+
 import javax.swing.border.TitledBorder;
 
 import org.junit.Test;
@@ -9,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ayeon.domain.BoardVO;
+import com.ayeon.domain.Criteria;
 import com.ayeon.mapper.BoardMapper;
 
 import lombok.Setter;
@@ -71,13 +76,25 @@ public class BoardMapperTests {
 //		
 //	}
 //	
+//	@Test
+//	public void testUpdate() {
+//		
+//		BoardVO board= mapper.read(10L);
+//		board.setContent("압둘라압둘라압둘라압둘라압둘라");
+//		
+//		log.info(mapper.update(board));
+//		
+//		
+//	}
+	
 	@Test
-	public void testUpdate() {
+	public void testListWithPaging() {
+		Criteria cri = new Criteria();
 		
-		BoardVO board= mapper.read(10L);
-		board.setContent("압둘라압둘라압둘라압둘라압둘라");
+		List<BoardVO> list = mapper.listWithPaging(cri);
 		
-		log.info(mapper.update(board));
+		list.forEach(board -> log.info(board));
+		
 		
 		
 	}
