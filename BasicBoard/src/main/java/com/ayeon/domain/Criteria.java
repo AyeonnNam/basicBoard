@@ -1,8 +1,11 @@
 package com.ayeon.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 public class Criteria {
 
 	private int pageNum;

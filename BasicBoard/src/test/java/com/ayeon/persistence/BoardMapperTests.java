@@ -90,6 +90,8 @@ public class BoardMapperTests {
 	@Test
 	public void testListWithPaging() {
 		Criteria cri = new Criteria();
+		cri.setAmount(10);
+		cri.setPageNum(3);
 		
 		List<BoardVO> list = mapper.listWithPaging(cri);
 		
