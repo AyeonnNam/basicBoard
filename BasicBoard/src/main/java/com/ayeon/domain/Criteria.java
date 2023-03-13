@@ -10,7 +10,7 @@ public class Criteria {
 
 	private int pageNum;
 	private int amount;
-	
+
 	public Criteria() {
 		this(1,10);
 	}
@@ -22,7 +22,10 @@ public class Criteria {
 	}
 	
 	
-	
+	public int getSkip() {
+		return this.pageNum = (pageNum-1) * amount;
+	}
+    
 	
 	
 }

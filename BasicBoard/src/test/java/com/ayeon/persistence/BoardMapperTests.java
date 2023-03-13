@@ -93,6 +93,7 @@ public class BoardMapperTests {
 		cri.setAmount(10);
 		cri.setPageNum(3);
 		
+		log.info("testListWithPaging......................................................." );
 		List<BoardVO> list = mapper.listWithPaging(cri);
 		
 		list.forEach(board -> log.info(board));
