@@ -1,16 +1,18 @@
 package com.ayeon.domain;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
+@ToString
 public class Criteria {
 
 	private int pageNum;
 	private int amount;
-
+	private int skip;
 	public Criteria() {
 		this(1,10);
 	}
@@ -23,7 +25,7 @@ public class Criteria {
 	
 	
 	public int getSkip() {
-		return this.pageNum = (pageNum-1) * amount;
+		return this.skip = (pageNum -1) * amount;
 	}
     
 	

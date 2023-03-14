@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ayeon.domain.BoardVO;
+import com.ayeon.domain.Criteria;
 import com.ayeon.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -32,11 +33,16 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.read(bno);
 	}
 
-	@Override
-	public List<BoardVO> getList() {
-		return mapper.getList();
-	}
+//	@Override
+//	public List<BoardVO> getList() {
+//		return mapper.getList();
+//	}
 
+	@Override
+	public List<BoardVO> getList(Criteria cri){
+		return mapper.listWithPaging(cri);
+	}
+	
 	@Override
 	public boolean modify(BoardVO board) {
 

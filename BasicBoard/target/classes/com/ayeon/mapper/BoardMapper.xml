@@ -10,13 +10,28 @@
 		0) As R , tbl_board t where @rownum <=#{pageNum} * #{amount} ORDER BY bno 
 		DESC) AS I where @rownum > (#{pageNum}-1) *#{amount}; ]]> </select> -->
 
-	<select id="listWithPaging"
+	  <select id="listWithPaging"
 		resultType="com.ayeon.domain.BoardVO">
 
-		select r1.* from (select * from tbl_board order by bno DESC) r1 limit
-		#{skip}, #{amount}
-	</select>
+		select r1.* from (select * from tbl_board order by bno DESC) r1 
+		LIMIT #{amount} 
+		OFFSET  #{skip}
+	</select>  
 
+	<!-- <select id="listWithPaging" resultType="com.ayeon.domain.BoardVO">
+	
+	<![CDATA[select rnum,bno, title, content, writer, regdate, updatedate
+	 from(
+		select @ROWNUM := @ROWNUM +1 as rnum, bno, title, writer, content, regdate, updatedate
+		from tbl_board, (select @ROWNUM :=0) A 
+		order by bno desc
+		) result 
+		where rnum > (#{pageNum} - 1) * #{amount}
+		 LIMIT #{amount} ]]>
+	</select>
+ -->
+ 
+ 
 
 	<select id="getList" resultType="com.ayeon.domain.BoardVO">
   <![CDATA[select * from tbl_board where bno > 0]]>

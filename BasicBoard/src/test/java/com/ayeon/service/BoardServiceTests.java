@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ayeon.domain.BoardVO;
+import com.ayeon.domain.Criteria;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -40,33 +41,37 @@ public class BoardServiceTests {
 //		log.info("생성된 게시물의 번호: " + board.getBno());
 //	}
 	
-	@Test
-	public void testGet() {
-		log.info(service.get(1L));
-		
-	}
+//	@Test
+//	public void testGet() {
+//		log.info(service.get(1L));
+//		
+//	}
 	
 	@Test
 	public void testGetList() {
-		service.getList().forEach(board-> log.info(board));
+		
+		Criteria cri = new Criteria(2,10);
+		//log.info("..................................." + cri.getPageNum());
+		//log.info("................................." + cri.getSkip());
+		service.getList(cri).forEach(board-> log.info(board));
 	}
 	
-	@Test
-	public void testUpdate() {
-		BoardVO board = service.get(1L);
-		if(board == null) {
-			return;
-		}
-		
-		board.setTitle("제목 수정........");
-		service.modify(board);
-	}
-	
-	@Test
-	public void testDelete() {
-		
-		log.info("REMOVE RESULT......................: " + service.remove(3L));
-	}
+//	@Test
+//	public void testUpdate() {
+//		BoardVO board = service.get(1L);
+//		if(board == null) {
+//			return;
+//		}
+//		
+//		board.setTitle("제목 수정........");
+//		service.modify(board);
+//	}
+//	
+//	@Test
+//	public void testDelete() {
+//		
+//		log.info("REMOVE RESULT......................: " + service.remove(3L));
+//	}
 	
 
 }
