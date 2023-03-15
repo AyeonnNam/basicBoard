@@ -1,5 +1,6 @@
 package com.ayeon.goodWeb;
 
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.concurrent.SuccessCallback;
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ayeon.domain.BoardVO;
 import com.ayeon.domain.Criteria;
+import com.ayeon.domain.pageDTO;
 import com.ayeon.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -30,6 +32,7 @@ public class BoardController {
 
 		log.info("list...............");
 		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("pageMaker", new pageDTO(cri, 123));
 
 	}
 	
