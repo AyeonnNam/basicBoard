@@ -39,8 +39,10 @@
 					<c:forEach items="${list}" var="board">
 						<tr>
 							<td><c:out value="${board.bno}" /></td>
+<%-- 							<td><a href='/board/get?bno=<c:out value="${board.bno }"/>'><c:out value ="${board.title}"/></a></td>
+ --%>							
 							<td><a class='move' href='<c:out value="${board.bno}"/>'><c:out
-										value="${board.title}" /></a></td>
+										value="${board.title}" /></a></td> 
 							<td><c:out value="${board.writer}" /></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.regdate}" /></td>
@@ -51,9 +53,8 @@
 
 				</table>
 				<form id='actionForm' action="/board/list" method='get'>
-					<input type='hidden' name='pageNum'
-						value='${pageMaker.cri.pageNum}'> <input type='hidden'
-						name='amount' value='${pageMaker.cri.amount}'>
+					<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+				    <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 
 				</form>
 				<div class='pull-right'>
@@ -144,6 +145,7 @@
 					self.location = "/board/register";
 				});
 
+				
 				var actionForm = $("#actionForm");
 
 				$(".paginate_button a ").on(
@@ -156,6 +158,14 @@
 									$(this).attr("href"));
 							actionForm.submit();
 						});
+				
+				//list.jsp 게시물 조회를 위한 이벤트 처리 추가 
+				$(".move").on("click", function(e) {
+					e.preventDefault();
+					actionForm.append("<input type='hidden' name= 'bno' value= '"+$(this).attr("href")+"'>");
+					actionForm.attr("action","/board/get");
+					actionForm.submit();
+				});
 			});
 </script>
 <%@ include file="../includes/footer.jsp"%>
