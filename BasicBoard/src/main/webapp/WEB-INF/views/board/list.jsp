@@ -50,6 +50,7 @@
 					</c:forEach>
 
 				</table>
+				
 				<form id='actionForm' action="/board/list" method='get'>
 					<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 				    <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
@@ -146,10 +147,7 @@
 				
 				var actionForm = $("#actionForm");
 
-				$(".paginate_button a ").on(
-						"click",
-						function(e) {
-
+				$(".paginate_button a ").on("click", function(e) {
 							e.preventDefault();
 							console.log('click');
 							actionForm.find("input[name = 'pageNum']").val(
