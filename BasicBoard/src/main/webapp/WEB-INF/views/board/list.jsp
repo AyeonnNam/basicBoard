@@ -140,7 +140,9 @@
 					//id
 					$("#myModal").modal("show");
 				}
-
+				
+				
+				<!-- id = regBtn, register new board -->
 				$("#regBtn").on("click", function() {
 
 					self.location = "/board/register";
@@ -148,16 +150,17 @@
 
 				
 				var actionForm = $("#actionForm");
-
 				$(".paginate_button a ").on("click", function(e) {
 							e.preventDefault();
-							console.log('click');
+							<!--console.log('click');-->
 							actionForm.find("input[name = 'pageNum']").val(
 									$(this).attr("href"));
 							actionForm.submit();
 						});
 				
 				//list.jsp 게시물 조회를 위한 이벤트 처리 추가 
+				//게시물의 제목을 클릭하면 <form> 태그에 추가로 bno 값을 전송하기 위해서 <input> 태그를 만들어 추가 
+				//조회 페이지에서 다시 목록 페이지로 이동하기위해 bno, pageNum, amount 값 전송 
 				$(".move").on("click", function(e) {
 					e.preventDefault();
 					actionForm.append("<input type='hidden' name= 'bno' value= '"+$(this).attr("href")+"'>");
