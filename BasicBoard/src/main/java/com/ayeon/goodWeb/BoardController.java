@@ -1,14 +1,11 @@
 package com.ayeon.goodWeb;
 
-import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.concurrent.SuccessCallback;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,10 +27,11 @@ public class BoardController {
 
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
-
+		
 		log.info("list...............");
 		model.addAttribute("list", service.getList(cri));
-		model.addAttribute("pageMaker", new pageDTO(cri, 123));
+		int total = service.getTotal(cri);
+		model.addAttribute("pageMaker", new pageDTO(cri, total));
 
 	}
 	

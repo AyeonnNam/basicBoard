@@ -13,6 +13,7 @@
 	<!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
+<!--  테이블  -->
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
@@ -56,6 +57,7 @@
 				    <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 
 				</form>
+				<!-- 페이지 번호 출력  -->
 				<div class='pull-right'>
 					<ul class="pagination">
 
@@ -78,7 +80,7 @@
 
 
 
-
+				<!-- 글이 등록되었을 때 뜨는 모달창  -->
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 					aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">

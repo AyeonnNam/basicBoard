@@ -28,20 +28,20 @@ public class BoardMapperTests {
 	
 	@Setter(onMethod_ = @Autowired)
 	BoardMapper mapper;
-//	
-//	
-//	@Test
-//	public void testInsert() {
-//		BoardVO board = new BoardVO();
-//		board.setTitle("title");
-//		board.setContent("content");
-//		board.setWriter("ayeon");
-//		
-//		mapper.insert(board);
-//		
-//		log.info("insert..............");
-//		
-//	}
+	
+	
+	@Test
+	public void testInsert() {
+		BoardVO board = new BoardVO();
+		board.setTitle("title");
+		board.setContent("content");
+		board.setWriter("ayeon");
+		
+		mapper.insert(board);
+		
+		log.info("insert..............");
+		
+	}
 //	
 //	@Test
 //	public void testInsertSelectKey() {
@@ -87,19 +87,19 @@ public class BoardMapperTests {
 //		
 //	}
 	
-	@Test
-	public void testListWithPaging() {
-		Criteria cri = new Criteria();
-		cri.setAmount(10);
-		cri.setPageNum(3);
-		
-		log.info("testListWithPaging......................................................." );
-		List<BoardVO> list = mapper.listWithPaging(cri);
-		
-		list.forEach(board -> log.info(board));
-		
-		
-		
-	}
+//	@Test
+//	public void testListWithPaging() {
+//		Criteria cri = new Criteria();
+//		cri.setAmount(10);
+//		cri.setPageNum(3);
+//		
+//		log.info("testListWithPaging......................................................." );
+//		List<BoardVO> list = mapper.listWithPaging(cri);
+//		
+//		list.forEach(board -> log.info(board));
+//		
+//		
+//		
+//	}
 
 }
