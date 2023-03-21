@@ -61,12 +61,11 @@
 
 
 	<select id="getTotalCount" resultType="int">
-		select count(*) from
-		tbl_board where
+		<![CDATA[select count(*) from tbl_board where]]>
 		<include refid="criteriaForTotalCount"></include>
 		
-		
-		  bno > 0;
+		<![CDATA[ bno > 0]]>
+		 
 		
 		
 	</select>
