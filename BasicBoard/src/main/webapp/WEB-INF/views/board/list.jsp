@@ -41,7 +41,7 @@
 						<tr>
 							<td><c:out value="${board.bno}" /></td>
 							<td><a class='move' href='<c:out value="${board.bno}"/>'><c:out
-										value="${board.title}" /></a></td> 
+										value="${board.title}" /></a></td>
 							<td><c:out value="${board.writer}" /></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd"
 									value="${board.regdate}" /></td>
@@ -51,10 +51,30 @@
 					</c:forEach>
 
 				</table>
-				
+
+				<div class='row'>
+					<div class="col-lg-12">
+						<form id='searchForm' action="/board/list" method='get'>
+							<select name='type'>
+								<option value="">--</option>
+								<option value="T">제목</option>
+								<option value="C">내용</option>
+								<option value="W">작성자</option>
+								<option value="TC">제목 or 내용</option>
+								<option value="TW">제목 or 작성자</option>
+								<option value="TWC">제목 or 내용 or 작성자</option>
+							</select> <input type='text' name='keyword' /> <input type='hidden'
+								name='pageNum' value='${pageMaker.cri.pageNum }'> <input
+								type='hidden' name='amount' value='${pageMaker.cri.amount }'>
+							<button class='btn btn-default'>Search</button>
+						</form>
+					</div>
+				</div>
+
 				<form id='actionForm' action="/board/list" method='get'>
-					<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-				    <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+					<input type='hidden' name='pageNum'
+						value='${pageMaker.cri.pageNum}'> <input type='hidden'
+						name='amount' value='${pageMaker.cri.amount}'>
 
 				</form>
 				<!-- 페이지 번호 출력  -->
@@ -166,6 +186,24 @@
 					actionForm.append("<input type='hidden' name= 'bno' value= '"+$(this).attr("href")+"'>");
 					actionForm.attr("action","/board/get");
 					actionForm.submit();
+				});
+				
+				var searchForm= $("#searchForm");
+				$("#searchForm button").on("click", function(e){
+					//검색종류를 선택하지않으면 뜨는 창 	
+					if(!searchForm.find("option:selected").val()){
+						alert("검색종류를 선택하세요");
+						return false;
+					}
+					//키워드를 치지 않고 검색 버튼을 누르면 뜨는 알럿 창 
+					if(!searchForm.find("input[name='keyword']").val()){
+					alert("키워드를 입력하세요");
+					return false;
+						
+					}
+					
+					searchForm.submit();
+					
 				});
 			});
 </script>

@@ -53,6 +53,19 @@ public class BoardMapperTests {
 		List<BoardVO> boardList = mapper.listWithPaging(cri3);
 		boardList.forEach(board -> log.info(board));
 	}
+//	
+//	@Test
+//	public void testCount() {
+//		Criteria cri = new Criteria();
+//		cri.setKeyword("남아연");
+//		cri.setType("W");
+//		int totalCount = mapper.getTotalCount(cri);
+//		
+//	
+//		log.info(".....................total count.............." + totalCount);
+//		
+//	}
+//	
 	
 //	@Test
 //	public void testInsert() {

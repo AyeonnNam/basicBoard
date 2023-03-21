@@ -9,10 +9,8 @@
 		select r1.* from (select * from tbl_board order by bno DESC) r1 LIMIT #{amount} 
 		OFFSET #{skip} </select> -->
 
-	<select id="listWithPaging"
-		resultType="com.ayeon.domain.BoardVO">
-		<![CDATA[ select * from tbl_board]]>
-		<trim prefix="where (" suffix=")" prefixOverrides="OR">
+	<sql id="criteriaForListWithPaging">
+		<trim prefix="where (" suffix=") " prefixOverrides="OR">
 			<foreach item='type' collection="typeArr">
 				<trim prefix="OR">
 					<choose>
@@ -29,9 +27,33 @@
 				</trim>
 			</foreach>
 		</trim>
-		<![CDATA[ order by bno desc
-		 limit #{amount} 
-		 offset #{skip} ]]>
+	</sql>
+	
+	<sql id="criteriaForTotalCount">
+		<trim prefix=" (" suffix=") and " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like concat('%',#{keyword},'%')
+						</when>
+						<when test="type == 'C'.toString()">
+							content like concat('%',#{keyword},'%')
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like concat('%',#{keyword},'%')
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="listWithPaging"
+		resultType="com.ayeon.domain.BoardVO">
+		<![CDATA[ select * from tbl_board]]>
+		<include refid="criteriaForListWithPaging"></include>
+		<![CDATA[ order by bno desc limit #{amount} offset #{skip} ]]>
 	</select>
 
 
@@ -39,10 +61,14 @@
 
 
 	<select id="getTotalCount" resultType="int">
-
 		select count(*) from
-		tbl_board where bno > 0;
-
+		tbl_board where
+		<include refid="criteriaForTotalCount"></include>
+		
+		
+		  bno > 0;
+		
+		
 	</select>
 
 
