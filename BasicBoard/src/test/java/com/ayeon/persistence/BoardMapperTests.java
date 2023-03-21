@@ -31,17 +31,41 @@ public class BoardMapperTests {
 	
 	
 	@Test
-	public void testInsert() {
-		BoardVO board = new BoardVO();
-		board.setTitle("title");
-		board.setContent("content");
-		board.setWriter("ayeon");
+	public void testSearch() {
+		Criteria cri = new Criteria();
+		cri.setKeyword("ss");
+		cri.setType("TC");
+		log.info("---------------- 다중 검색 ----------------------");
+		List<BoardVO> boardVOs = mapper.listWithPaging(cri);
+		boardVOs.forEach(board -> log.info(board));
 		
-		mapper.insert(board);
+		Criteria cri2 = new Criteria();
+		cri2.setKeyword("남아연");
+		cri2.setType("W");
+		log.info("---------------- 단일 검색 ----------------------");
+		List<BoardVO> boardVOs2 = mapper.listWithPaging(cri2);
+		boardVOs2.forEach(board -> log.info(board));
 		
-		log.info("insert..............");
-		
+		Criteria cri3 = new Criteria();
+		cri3.setPageNum(2);
+		cri3.setAmount(10);
+		log.info("--------------- 검색 조건이 없는 경우 --------------" );
+		List<BoardVO> boardList = mapper.listWithPaging(cri3);
+		boardList.forEach(board -> log.info(board));
 	}
+	
+//	@Test
+//	public void testInsert() {
+//		BoardVO board = new BoardVO();
+//		board.setTitle("title");
+//		board.setContent("content");
+//		board.setWriter("ayeon");
+//		
+//		mapper.insert(board);
+//		
+//		log.info("insert..............");
+//		
+//	}
 //	
 //	@Test
 //	public void testInsertSelectKey() {

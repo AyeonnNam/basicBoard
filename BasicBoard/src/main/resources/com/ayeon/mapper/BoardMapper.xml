@@ -5,19 +5,43 @@
 <mapper namespace="com.ayeon.mapper.BoardMapper">
 
 
+	<!-- <select id="listWithPaging" resultType="com.ayeon.domain.BoardVO"> 
+		select r1.* from (select * from tbl_board order by bno DESC) r1 LIMIT #{amount} 
+		OFFSET #{skip} </select> -->
+
 	<select id="listWithPaging"
 		resultType="com.ayeon.domain.BoardVO">
-
-		select r1.* from (select * from tbl_board order by bno
-		DESC) r1
-		LIMIT #{amount}
-		OFFSET #{skip}
+		<![CDATA[ select * from tbl_board]]>
+		<trim prefix="where (" suffix=")" prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like concat('%',#{keyword},'%')
+						</when>
+						<when test="type == 'C'.toString()">
+							content like concat('%',#{keyword},'%')
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like concat('%',#{keyword},'%')
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+		<![CDATA[ order by bno desc
+		 limit #{amount} 
+		 offset #{skip} ]]>
 	</select>
+
+
+
 
 
 	<select id="getTotalCount" resultType="int">
 
-		select count(*) from tbl_board where bno > 0;
+		select count(*) from
+		tbl_board where bno > 0;
 
 	</select>
 
