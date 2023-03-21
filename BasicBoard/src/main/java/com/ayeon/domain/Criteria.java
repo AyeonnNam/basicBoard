@@ -14,6 +14,10 @@ public class Criteria {
 	private int amount;
 	private int skip;
 	
+	
+	private String type;
+	private String keyWord;
+	
 	public Criteria() {
 		this(1,10);
 	}
@@ -27,6 +31,11 @@ public class Criteria {
 	
 	public int getSkip() {
 		return this.skip = (pageNum -1) * amount;
+	}
+	
+	public String[] getTypeArr() {
+		return type == null ? new String[] {}: type.split("");
+				
 	}
     
 	
