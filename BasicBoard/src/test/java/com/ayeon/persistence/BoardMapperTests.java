@@ -42,7 +42,7 @@ public class BoardMapperTests {
 		Criteria cri2 = new Criteria();
 		cri2.setKeyword("남아연");
 		cri2.setType("W");
-		log.info("---------------- 단일 검색 ----------------------");
+				log.info("---------------- 단일 검색 ----------------------");
 		List<BoardVO> boardVOs2 = mapper.listWithPaging(cri2);
 		boardVOs2.forEach(board -> log.info(board));
 		
@@ -53,7 +53,9 @@ public class BoardMapperTests {
 		List<BoardVO> boardList = mapper.listWithPaging(cri3);
 		boardList.forEach(board -> log.info(board));
 	}
-//	
+
+	
+	//	
 //	@Test
 //	public void testCount() {
 //		Criteria cri = new Criteria();
@@ -65,7 +67,7 @@ public class BoardMapperTests {
 //		log.info(".....................total count.............." + totalCount);
 //		
 //	}
-//	
+	
 	
 //	@Test
 //	public void testInsert() {

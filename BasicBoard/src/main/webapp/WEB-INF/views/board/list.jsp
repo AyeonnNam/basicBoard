@@ -23,10 +23,10 @@
 					New Board</button>
 			</div>
 			<!-- /.panel-heading -->
-			<div class="panel-body">
+			  <div class="panel-body">  
+			  <!--table 태그에서 id="dataTables-example" 제거  -->
 				<table width="100%"
-					class="table table-striped table-bordered table-hover"
-					id="dataTables-example">
+					class="table table-striped table-bordered table-hover" >
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -65,13 +65,13 @@
 								<option value="TWC" <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':'' }"/>>제목 or 내용 or 작성자</option>
 							</select> 
 							 <input type='text' name='keyword' value= '<c:out value="${pageMaker.cri.keyword}"/>' />
-							 <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }'>
-							  <input type='hidden' name='amount' value='${pageMaker.cri.amount }'>
+							 <input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }'/>
+							  <input type='hidden' name='amount' value='${pageMaker.cri.amount }'/>
 							<button class='btn btn-default'>Search</button>
 						</form>
 					</div>
 				</div>
-
+			<!-- 페이지 버튼 누를 때  -->
 				<form id='actionForm' action="/board/list" method='get'>
 					<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
 				    <input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
@@ -131,7 +131,7 @@
 
 
 
-			</div>
+			 </div>
 			<!-- /.panel-body -->
 		</div>
 		<!-- /.panel -->
