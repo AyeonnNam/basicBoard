@@ -1,0 +1,28 @@
+<?xml  version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ayeon.mapper.ReplyMapper">
+	
+		<insert id= "insert">
+			insert into tbl_reply (rno, bno, reply, replyer) 
+			values ((select nextval('seq_reply') from dual), #{bno},#{reply},#{replyer})
+		</insert>
+
+		<select id="read" resultType="com.ayeon.domain.ReplyVO">
+			select * from tbl_reply where rno = #{rno}
+		</select>
+		
+		<update id="update">
+			update tbl_reply set reply = #{reply}, 
+			updateDate = current_timestamp where rno = #{rno}
+		
+		</update>
+		
+		<delete id="delete">
+			delete from tbl_reply where rno = #{rno}		
+		</delete>
+		
+
+
+</mapper>

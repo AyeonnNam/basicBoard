@@ -1,10 +1,8 @@
 package com.ayeon.persistence;
 
-import static org.hamcrest.CoreMatchers.both;
 
 import java.util.List;
 
-import javax.swing.border.TitledBorder;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,8 +16,6 @@ import com.ayeon.mapper.BoardMapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Log4j
