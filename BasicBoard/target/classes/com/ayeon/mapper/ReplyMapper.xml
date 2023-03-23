@@ -23,6 +23,14 @@
 			delete from tbl_reply where rno = #{rno}		
 		</delete>
 		
+		<select id="getListWithPaging" resultType="com.ayeon.domain.ReplyVO">
+		
+			select rno, bno, reply, replyer, replyDate, updateDate 
+			from tbl_reply 
+			where bno = #{bno}
+			order by rno asc
+			
+		</select>
 
 
 </mapper>

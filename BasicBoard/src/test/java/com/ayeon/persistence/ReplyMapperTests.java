@@ -1,5 +1,6 @@
 package com.ayeon.persistence;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 import org.junit.Test;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.ayeon.domain.Criteria;
 import com.ayeon.domain.ReplyVO;
 import com.ayeon.mapper.ReplyMapper;
 
@@ -50,14 +52,14 @@ public class ReplyMapperTests {
 //	 }
 // 
 //
-	@Test
-	public void testRead() {
-		
-		ReplyVO read = mapper.read(1L);
-		log.info("------------------- 댓글 : " +  read);
-				
-		
-	}
+//	@Test
+//	public void testRead() {
+//		
+//		ReplyVO read = mapper.read(1L);
+//		log.info("------------------- 댓글 : " +  read);
+//				
+//		
+//	}
 //	
 //	@Test
 //	public void testUpdate() {
@@ -80,6 +82,14 @@ public class ReplyMapperTests {
 //	}
 //	
 	
+	 
+	 @Test
+	public void testList() {
+		 
+		 Criteria cri = new Criteria();
+		 List<ReplyVO> vos = mapper.getListWithPaging(cri, 54530968L);
+		 vos.forEach(vo -> log.info(vo));
+	 }
 	
 	
 }
