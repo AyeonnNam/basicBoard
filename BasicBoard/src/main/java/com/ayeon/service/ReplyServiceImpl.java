@@ -9,14 +9,16 @@ import com.ayeon.domain.Criteria;
 import com.ayeon.domain.ReplyVO;
 import com.ayeon.mapper.ReplyMapper;
 
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class ReplyServiceImpl implements ReplyService {
 
-	@Setter(onMethod_ = @Autowired)
+	
 	private ReplyMapper mapper;
 	
 	
