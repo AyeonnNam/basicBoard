@@ -35,29 +35,68 @@
 				<label>Writer</label><input class="form-control" name='writer'
 					value='<c:out value="${board.writer }"/>' readonly="readonly">
 			</div>
-			
-			<button data-oper='modify' class="btn btn-default"
-			onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">Modify</button>
-			
-			<button data-oper='list' class="btn btn-info" onclick="location.href='/board/list'">List</button>
 
-			<!-- id= javascript에서 사용  : $('#operForm')-->			
-			
+			<button data-oper='modify' class="btn btn-default"
+				onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">Modify</button>
+
+			<button data-oper='list' class="btn btn-info"
+				onclick="location.href='/board/list'">List</button>
+
+			<!-- id= javascript에서 사용  : $('#operForm')-->
+
 			<form id='operForm' action="/board/modify" method="get">
-			<!-- id= javascript에서 사용  : operForm.find("#bno").remove();-->
-			<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
-			<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum }"/>'>
-			<input type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
-			<input type='hidden' name='keyword' value='<c:out value="${cri.keyword }"/>'>
-			<input type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
+				<!-- id= javascript에서 사용  : operForm.find("#bno").remove();-->
+				<input type='hidden' id='bno' name='bno'
+					value='<c:out value="${board.bno}"/>'> <input type='hidden'
+					name='pageNum' value='<c:out value="${cri.pageNum }"/>'> <input
+					type='hidden' name='amount' value='<c:out value="${cri.amount }"/>'>
+				<input type='hidden' name='keyword'
+					value='<c:out value="${cri.keyword }"/>'> <input
+					type='hidden' name='type' value='<c:out value="${cri.type}"/>'>
 			</form>
-			
+
 		</div>
 
 
 	</div>
 
 </div>
+
+<!-- 댓글 목록 처리  -->
+<div class='row'>
+	<div class="col-lg-12">
+		<!-- /panel -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<i class="fa fa-comments fa-fw"></i> Reply
+			</div>
+
+			<!--  panel-heading -->
+			<div class="panel-body">
+				<ul class="chat">
+					<!-- start reply -->
+					<li class="left clearfix" data-rno='12'>
+						<div>
+							<div class="header">
+								<strong class="primary-font">user00</strong> <small
+									class="pull-right text-muted">2023-03-25 12:42</small>
+							</div>
+							<p>Good condom~!</p>
+						</div>
+					</li>
+					<!-- end Reply -->
+				</ul>
+				<!-- end ul -->
+
+			</div>
+			<!-- .panel .chat-panel -->
+		</div>
+
+	</div>
+	<!-- end row -->
+
+</div>
+
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 <script>
