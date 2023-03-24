@@ -2,7 +2,6 @@ package com.ayeon.goodWeb;
 
 import java.util.List;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -55,26 +54,26 @@ public class ReplyController {
 	@GetMapping(value = "/{rno}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<ReplyVO> get(@PathVariable("rno") Long rno) {
 		log.info("get..................." + rno);
-		return new ResponseEntity<ReplyVO>(service.get(rno), HttpStatus.OK);	}
-	
+		return new ResponseEntity<ReplyVO>(service.get(rno), HttpStatus.OK);
+	}
 
-	@DeleteMapping(value="/{rno}", produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> remove(@PathVariable("rno")Long rno){		
-		log.info("remove............" +  rno);
-		return service.remove(rno) == 1? new ResponseEntity<String>("success", HttpStatus.OK)
-				:new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-}
+	@DeleteMapping(value = "/{rno}", produces = { MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<String> remove(@PathVariable("rno") Long rno) {
+		log.info("remove............" + rno);
+		return service.remove(rno) == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)
+				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
-	@RequestMapping(method = {RequestMethod.PUT, RequestMethod.PATCH},
-			value="/{rno}", consumes = "application/json",
-			produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> modify(@PathVariable("rno") Long rno, @RequestBody ReplyVO vo){
+	@RequestMapping(method = { RequestMethod.PUT,
+			RequestMethod.PATCH }, value = "/{rno}", consumes = "application/json", produces = {
+					MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<String> modify(@PathVariable("rno") Long rno, @RequestBody ReplyVO vo) {
 		vo.setRno(rno);
 		log.info("rno: ...................." + rno);
 		log.info("modify:................." + vo);
-		
-		return service.modify(vo) == 1 ? 
-				new ResponseEntity<String>("success", HttpStatus.OK):new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+		return service.modify(vo) == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)
+				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
 }
