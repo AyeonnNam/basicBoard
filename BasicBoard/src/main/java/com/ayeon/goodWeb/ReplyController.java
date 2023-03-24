@@ -27,35 +27,36 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @RequestMapping("/replies/")
 public class ReplyController {
-	
+
 	private ReplyServiceImpl service;
-	
-	@PostMapping(value = "/new",
-			consumes = "application/json",
-			produces = {MediaType.TEXT_PLAIN_VALUE}	)
-	public ResponseEntity<String> create(@RequestBody ReplyVO vo){
-		
+
+	@PostMapping(value = "/new", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<String> create(@RequestBody ReplyVO vo) {
+
 		log.info("Replyvo" + vo);
 
 		int insertCount = service.register(vo);
 		log.info("Reply INSERT COUNT : " + insertCount);
-		return insertCount == 1 ? 
-				new ResponseEntity<>("success", HttpStatus.OK) 
+		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	
-	@GetMapping(value="/pages/{bno}/{page}",
-		produces = {
-				MediaType.APPLICATION_XML_VALUE,
-				MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno){
+
+	@GetMapping(value = "/pages/{bno}/{page}", produces = { MediaType.APPLICATION_XML_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) {
 		log.info("getList............");
 		Criteria cri = new Criteria(page, 10);
 		log.info("cri" + cri);
 		return new ResponseEntity<List<ReplyVO>>(service.getList(cri, bno), HttpStatus.OK);
+
+	}
+
+	@GetMapping(value = "/{rno}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<ReplyVO> get(@PathVariable("rno") Long rno) {
+		log.info("get..................." + rno);
+		return new ResponseEntity<ReplyVO>(service.get(rno), HttpStatus.OK);	
+		
 		
 	}
-	
-	
- }
+
+}
