@@ -93,7 +93,7 @@
 	}); */
 	
 		
-		replyService.update({
+		/* replyService.update({
 			rno :22,
 			bno : bnoValue,
 			reply : "Modified Reply......"
@@ -103,7 +103,14 @@
 		
 			
 			
+		}); */
+		
+		
+		replyService.get(10, function(data){
+			console.log(data);
 		});
+		
+		
 		
 </script>
 
