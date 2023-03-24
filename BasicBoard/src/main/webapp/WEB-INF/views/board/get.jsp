@@ -91,6 +91,20 @@
 		
 		
 	}); */
+	
+	
+		replyService.update({
+			rno :22,
+			bno : bnoValue,
+			reply : "Modified Reply......"
+		
+		}, function(result){
+			alert("수정 완료 ");
+		
+			
+			
+		});
+		
 </script>
 
 
