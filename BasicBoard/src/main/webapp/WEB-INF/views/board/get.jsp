@@ -92,7 +92,7 @@
 		
 	}); */
 	
-	
+		
 		replyService.update({
 			rno :22,
 			bno : bnoValue,

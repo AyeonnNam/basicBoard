@@ -81,6 +81,20 @@ var replyService= (function(){
 		
 		});
 	}
+	
+	function get(rno, callback, error){
+		$.get("/replies/"+ rno +".json", function(reuslt){
+			if(callback){
+				callback(result);
+			}
+			
+		}).fail(function(xhr, status, err){
+			if(error){
+				 error();
+				 }
+		
+		});
+	}
 
 	
   
@@ -88,7 +102,8 @@ var replyService= (function(){
 	return {add:add,
 	getList: getList,
 	remove: remove,
-	update: update
+	update: update,
+	get: get
 	};
 
 })();
