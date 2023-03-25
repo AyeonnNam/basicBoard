@@ -23,7 +23,11 @@ var replyService= (function(){
 	})
   }
   
-  
+  	//댓글 페이지의 화면 처리 
+	// 게시물을 조회하는 페이지에 들어올 시, 기본적으로 가장 오래된 댓글들을 가져와서 1p에 보여줌 
+	// 1p의 게시물을 가져올 시, 해당 게시물의 댓글의 숫자를 파악해서  댓글의 페이지 번호 출력 
+	// 댓글이 추가되면 댓글의 수자만을 가져와서 최종 페이지를 찾아 이동 
+	// 댓글의 수정과 삭제 후에는 다시 동일 페이지 호출 
 	function getList(param, callback, error){
 		
 		var bno = param.bno;
@@ -32,7 +36,8 @@ var replyService= (function(){
 		$.getJSON("/replies/pages/"+bno+"/" + page + ".json",
 			function(data){
 				if(callback){
-				callback(data);
+				//callback(data);
+				callback(data.replyCnt, data.list);
 				}
 			}).fail(function(xhr, status, err){
 			if(error){
@@ -123,6 +128,7 @@ var replyService= (function(){
 		}
 	
 	;
+	
 	
   
 	
