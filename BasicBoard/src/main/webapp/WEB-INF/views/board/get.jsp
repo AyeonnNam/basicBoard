@@ -99,6 +99,7 @@
 
 </div>
 
+<!--  댓글 등록 모달창  -->
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -219,6 +220,15 @@
 				});				
 				
 			});
+			
+			//댓글 클릭 이벤트 처리 
+			$(".chat").on("click", "li", function(e){
+				
+					var rno = $(this).data("rno");
+					
+					console.log(rno);
+				
+			})
 		
 		
 	});
