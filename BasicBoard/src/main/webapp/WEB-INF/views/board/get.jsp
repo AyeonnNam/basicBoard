@@ -196,8 +196,27 @@
 				modalRegisterBtn.show();
 				
 				$(".modal").modal("show");
+			});
+			
+			
+			
+			modalRegisterBtn .on("click", function(e){
 				
+				var reply = {
+						reply : modalInputReply.val(),
+						replyer: modalInputReplyer.val(),
+						bno: bnoValue
+				};
 				
+				replyService.add(reply, function(result){
+					
+					alert(result);
+					
+					modal.find("input").val("");
+					modal.modal("hide");
+					
+					showList(1);
+				});				
 				
 			});
 		
