@@ -3,6 +3,7 @@ package com.ayeon.service;
 import java.util.List;
 
 import com.ayeon.domain.Criteria;
+import com.ayeon.domain.ReplyPageDTO;
 import com.ayeon.domain.ReplyVO;
 
 public interface ReplyService {
@@ -17,6 +18,6 @@ public interface ReplyService {
 	
 	public List<ReplyVO> getList(Criteria cri, Long bno);
 	
-	
+	public ReplyPageDTO getListPage(Criteria cri, Long bno);
 	
 }
