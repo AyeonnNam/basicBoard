@@ -336,7 +336,9 @@
 					alert(result);
 					modal.modal("hide");
 					//showList(1);
-					showList(-1);
+					//showList(-1);
+					//댓글이 페이지 처리되면 댓글의 수정시 현재 댓글이 포함된 페이지로 이동하도록 수정 
+					showList(pageNum);
 				});
 				
 			});
@@ -349,7 +351,9 @@
 					
 					alert(result);
 					modal.modal("hide");
-					showList(1);
+					//showList(1);
+					//댓글이 페이지 처리되면 댓글삭제시 현재 댓글이 포함된 페이지로 이동하도록 수정 
+					showList(pageNum);
 					
 				});
 				
