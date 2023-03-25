@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ayeon.domain.Criteria;
+import com.ayeon.domain.ReplyPageDTO;
 import com.ayeon.domain.ReplyVO;
 import com.ayeon.service.ReplyService;
 import com.ayeon.service.ReplyServiceImpl;
@@ -43,11 +44,11 @@ public class ReplyController {
 
 	@GetMapping(value = "/pages/{bno}/{page}", produces = { MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<List<ReplyVO>> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) {
+	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("bno") Long bno) {
 		log.info("getList............");
 		Criteria cri = new Criteria(page, 10);
 		log.info("cri" + cri);
-		return new ResponseEntity<List<ReplyVO>>(service.getList(cri, bno), HttpStatus.OK);
+		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 
 	}
 
