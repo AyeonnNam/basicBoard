@@ -127,7 +127,7 @@
 				<button id='modalModBtn' type="button" class="btn btn-default" data-dismiss="modal">Modify</button>
 				<button id ='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
 				<button id= 'modalCloseBtn' type="button" class="btn btn-default" data-dismiss= 'modal'>Close</button>
-				<button id='modalRegisgterBtn' type="button" class="btn btn-default" data-dismiss= 'modal'>Register</button>
+				<button id='modalRegisterBtn' type="button" class="btn btn-default" data-dismiss= 'modal'>Register</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -140,6 +140,7 @@
 
 <script type="text/javascript" src="/resources/js/reply.js"></script>
 <script>
+	
 	$(document).ready(function(){
 			
 		var bnoValue = '<c:out value= "${board.bno}"/>';
@@ -147,7 +148,7 @@
 		var replyUL = $(".chat");
 		
 			showList(1);
-		
+				//댓글목록 처리 	
 			function showList(page){
 				
 				replyService.getList({bno:bnoValue, page: page||1}, function(list){
@@ -174,6 +175,31 @@
 				
 				
 			} //end showList 
+			
+			
+			// 댓글 추가 시작 시 버튼 이벤트 처리 
+			var modal = $(".modal");
+			var modalInputReply = modal.find("input[name='reply']");
+			var modalInputReplyer = modal.find("input[name='replyer']");
+			var modalInputReplyDate = modal.find("input[name='replyDate']");
+			
+			var modalModBtn = $("#modalModBtn");
+			var modalRemoveBtn = $("#modalRemoveBtn");
+			var modalRegisterBtn = $("#modalRegisterBtn");
+			
+			$("#addReplyBtn").on("click", function(e){
+				
+				modal.find("input").val("");
+				modalInputReplyDate.closest("div").hide();
+				modal.find("button[id !='modalCloseBtn']").hide();
+				
+				modalRegisterBtn.show();
+				
+				$(".modal").modal("show");
+				
+				
+				
+			});
 		
 		
 	});
