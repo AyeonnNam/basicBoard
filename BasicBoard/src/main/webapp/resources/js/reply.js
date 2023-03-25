@@ -48,6 +48,7 @@ var replyService= (function(){
 	
 	}  
 	
+	//댓글삭제 
 	function remove(rno, callback, error){
 		$.ajax({
 			type: 'delete',
