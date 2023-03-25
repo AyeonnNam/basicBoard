@@ -31,6 +31,7 @@ public class Criteria {
 	}
 	
 	
+	
 	public int getSkip() {
 		return this.skip = (pageNum -1) * amount;
 	}
