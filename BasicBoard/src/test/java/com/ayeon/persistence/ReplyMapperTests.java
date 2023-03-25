@@ -1,7 +1,11 @@
 package com.ayeon.persistence;
 
+import static org.hamcrest.CoreMatchers.sameInstance;
+
 import java.util.List;
 import java.util.stream.IntStream;
+
+import javax.management.loading.PrivateClassLoader;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,13 +87,29 @@ public class ReplyMapperTests {
 //	
 	
 	 
+//	 @Test
+//	public void testList() {
+//		 
+//		 Criteria cri = new Criteria();
+//		 List<ReplyVO> vos = mapper.getListWithPaging(cri, 54530968L);
+//		 vos.forEach(vo -> log.info(vo));
+//	 }
+//	
+	 
 	 @Test
-	public void testList() {
+	 public void testList2() {
 		 
-		 Criteria cri = new Criteria();
-		 List<ReplyVO> vos = mapper.getListWithPaging(cri, 54530968L);
-		 vos.forEach(vo -> log.info(vo));
+		 Criteria cri = new Criteria(2,10);
+		 
+		 List<ReplyVO> lists = mapper.getListWithPaging(cri, 54531094L);
+		 
+		 lists.forEach(reply->log.info(reply));
+		 
+		 
+		 
+		 
+		 
 	 }
-	
+	 
 	
 }
