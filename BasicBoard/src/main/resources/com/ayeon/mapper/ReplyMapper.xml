@@ -6,16 +6,19 @@
 
 	<insert id="insert">
 		insert into tbl_reply (rno, bno, reply, replyer)
-		values ((select nextval('seq_reply') from dual), #{bno},#{reply},#{replyer})
+		values ((select nextval('seq_reply') from dual),
+		#{bno},#{reply},#{replyer})
 	</insert>
 
 	<select id="read" resultType="com.ayeon.domain.ReplyVO">
-		select * from tbl_reply where rno = #{rno}
+		select * from tbl_reply where rno =
+		#{rno}
 	</select>
 
 	<update id="update">
 		update tbl_reply set reply = #{reply},
-		updateDate = current_timestamp where rno = #{rno}
+		updateDate =
+		current_timestamp where rno = #{rno}
 
 	</update>
 
@@ -23,15 +26,9 @@
 		delete from tbl_reply where rno = #{rno}
 	</delete>
 
-<!--  <select id="getListWithPaging"
-		resultType="com.ayeon.domain.ReplyVO">
-
-		select rno, bno, reply, replyer, replyDate, updateDate
-		from tbl_reply
-		where bno = #{bno}
-		order by rno asc
-
-	</select> -->	
+	<!-- <select id="getListWithPaging" resultType="com.ayeon.domain.ReplyVO"> 
+		select rno, bno, reply, replyer, replyDate, updateDate from tbl_reply where 
+		bno = #{bno} order by rno asc </select> -->
 
 	<select id="getListWithPaging"
 		resultType="com.ayeon.domain.ReplyVO">
@@ -51,6 +48,17 @@
 				]]>
 
 	</select>
+
+	<select id="getCountByBno" resultType="int">
+			<![CDATA[
+			
+					select count(rno) from tbl_reply where bno = #{bno};
+			
+			]]>
+
+	</select>
+
+
 
 
 
