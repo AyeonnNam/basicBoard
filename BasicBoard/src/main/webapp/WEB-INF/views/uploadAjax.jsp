@@ -17,6 +17,8 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		crossorigin="anonymous"></script>
+
+
 <script>
 	$(document).ready(function(){
 		
@@ -55,13 +57,13 @@
 			}
 			
 			$.ajax({
-				
-				url: '/uploadAjaxAction',
+				url: '${pageContext.request.contextPath}/uploadAjaxAction',
 				processData : false,
 				contentType : false,
 				data : formData,
 				type : 'POST',
 				success : function(result){
+					console.log(result);
 					alert("Uploaded");
 				}
 				

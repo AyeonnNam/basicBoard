@@ -2,7 +2,7 @@
 <web-app 
 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 
@@ -35,7 +35,7 @@
 
 		<multipart-config>
 			<location>/Users/nam-ayeon/Desktop/untitledfolder/temp</location>
-			<max-file-siz>20971520</max-file-siz>
+			<max-file-size>20971520</max-file-size>
 			<max-request-size>41943040</max-request-size>
 			<file-size-threshold>20971520</file-size-threshold>
 		</multipart-config>

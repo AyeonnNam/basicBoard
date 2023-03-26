@@ -5,6 +5,7 @@ import java.io.File;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -20,7 +21,8 @@ public class UploadController {
 		log.info("upload ajax");
 
 	}
-
+	
+	@ResponseBody
 	@PostMapping("/uploadAjaxAction")
 	public void uploadAjaxPost(MultipartFile[] uploadFile) {
 
@@ -37,8 +39,9 @@ public class UploadController {
 			//업로드될파일이름 
 			String uploadFileName = multipartFile.getOriginalFilename();
 			
-			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("/") + 1);
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 
+			
 			log.info("only file name : " + uploadFileName);
 			File saveFile = new File(uploadFolder,uploadFileName);
 
