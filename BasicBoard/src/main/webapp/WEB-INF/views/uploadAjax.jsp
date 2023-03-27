@@ -11,6 +11,13 @@
 	<div class='uploadDiv'>
 		<input type='file' name='uploadFile' multiple>
 	</div>
+	
+	<div class='uploadResult'>
+		<ul>
+		
+		</ul>
+	</div>
+	
 	<button id='uploadBtn'>Upload</button>
 
 
