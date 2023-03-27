@@ -97,6 +97,12 @@
 			<artifactId>gson</artifactId>
 			<version>2.8.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4 -->
 		<dependency>
@@ -117,7 +123,7 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>${org.aspectj-version}</version>
-			<!--   <scope>runtime</scope> -->
+			<!-- <scope>runtime</scope> -->
 		</dependency>
 
 
