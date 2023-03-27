@@ -5,15 +5,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ayeon.domain.AttachFileDTO;
 
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -29,25 +35,26 @@ public class UploadController {
 
 	}
 	
+	
 	@ResponseBody
-	@PostMapping("/uploadAjaxAction")
-	public void uploadAjaxPost(MultipartFile[] uploadFile) {
+	@PostMapping(value = "/uploadAjaxAction", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 
 		log.info("update ajax post..............");
 
+		List<AttachFileDTO> list = new ArrayList<AttachFileDTO>();
+		
 		//업로드될폴더 
 		String uploadFolder = "/Users/nam-ayeon/Desktop/untitledfolder/temp";
+		String uploadFolderPath = getFolder();
 		
 		//makeFolder
-		File uploadPath = new File(uploadFolder, getFolder());
+		File uploadPath = new File(uploadFolder, uploadFolderPath);
 		log.info(" -- upload Path: --  " + uploadPath);
 		if(uploadPath.exists() == false) {
 			
 			uploadPath.mkdirs();
 		}//make yyyy/MM/dd folder 
-		
-		
-
 		
 		for (MultipartFile multipartFile : uploadFile) {
 
@@ -55,12 +62,17 @@ public class UploadController {
 			log.info("UploadFileName: " + multipartFile.getOriginalFilename());
 			log.info("UploadFileSize: " + multipartFile.getSize());
 			*/
+
+			AttachFileDTO attachDTO = new AttachFileDTO();
 			
 			//업로드될파일이름 
 			String uploadFileName = multipartFile.getOriginalFilename();
 			
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 
+			attachDTO.setFileName(uploadFileName);
+			
+			
 			
 //			log.info("only file name : " + uploadFileName);
 
@@ -68,13 +80,18 @@ public class UploadController {
 			
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
 			
-			File saveFile = new File(uploadPath,uploadFileName);
 
 			try {
-
+				File saveFile = new File(uploadPath,uploadFileName);
 				multipartFile.transferTo(saveFile);
 				
+				attachDTO.setUuid(uuid.toString());
+				attachDTO.setUploadPath(uploadFolderPath);
+				
+				
 				if(checkImageType(saveFile)) {
+					
+					attachDTO.setImage(true);
 					
 					FileOutputStream thumbnail 
 					= new FileOutputStream(new File(uploadPath, "s_" +  uploadFileName));
@@ -85,12 +102,17 @@ public class UploadController {
 					
 				}
 				
+				// add to list
+				list.add(attachDTO);
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 				log.error(e.getMessage());
 			}
 
-		}
+		} //end for 
+		
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
 	//오늘의 날짜를 경로로 만들어 문자열로 반환 

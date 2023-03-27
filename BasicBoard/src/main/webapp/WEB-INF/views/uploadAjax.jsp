@@ -39,6 +39,15 @@
 			
 		}
 		
+		
+			/* <input type='file'>은 readOnly라 안쪽내용 수정 불가능, 
+			별도의 방법으로 초기화, 아무내용 없는 객체<div>를 복사 ,
+			업로드 후에 추가해서 초기화하기 
+			*/ 
+			var cloneObj = $(".uploadDiv").clone();
+		
+		
+			
 		$("#uploadBtn").on("click", function(e){
 			
 			var formData = new FormData();
@@ -62,9 +71,12 @@
 				contentType : false,
 				data : formData,
 				type : 'POST',
+				dataType: 'json',
 				success : function(result){
 					console.log(result);
 					alert("Uploaded");
+					
+					$(".uploadDiv").html(cloneObj.html());
 				}
 				
 				
