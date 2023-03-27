@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -143,6 +145,21 @@ public class UploadController {
 			return result;
 		}
 	
+		@GetMapping(value= "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE )
+		@ResponseBody
+		public ResponseEntity<Resource> downloadFile(String fileName){
+			
+			log.info("------------ download file ----------------- " + fileName);
+			
+			Resource resource = new FileSystemResource("/Users/nam-ayeon/Desktop/untitledfolder/temp/" +fileName);
+			
+			log.info("-----resource-------" + resource);
+			
+			return null;
+			
+		}
+		
+		
 	//오늘의 날짜를 경로로 만들어 문자열로 반환 
 	private String getFolder() {
 		
