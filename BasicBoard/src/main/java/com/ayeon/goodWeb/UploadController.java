@@ -122,7 +122,7 @@ public class UploadController {
 		public ResponseEntity<byte[]> getFile(String fileName){
 			
 			log.info("------------------- fileName : " + fileName);
-			File file = new File("/Users/nam-ayeon/Desktop/untitledfolder/temp" +  fileName);
+			File file = new File("/Users/nam-ayeon/Desktop/untitledfolder/temp/" +  fileName);
 			log.info("--------------- file ------------- " +  file);
 			
 			ResponseEntity<byte[]> result = null;
@@ -153,7 +153,7 @@ public class UploadController {
 	
 		}
 	
-	//이미지 타입인지 검사하는 메서드 
+	//이미지 타입인지 아닌지 검사하는 메서드 
 	private boolean checkImageType(File file) {
 		
 		try {
