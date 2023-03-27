@@ -1,6 +1,9 @@
 package com.ayeon.goodWeb;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -14,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ctc.wstx.shaded.msv_core.grammar.xmlschema.Field;
 
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Slf4j
@@ -65,13 +69,22 @@ public class UploadController {
 			
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
 			
-			
 			File saveFile = new File(uploadPath,uploadFileName);
 
 			try {
 
 				multipartFile.transferTo(saveFile);
 				
+				if(checkImageType(saveFile)) {
+					
+					FileOutputStream thumbnail 
+					= new FileOutputStream(new File(uploadPath, "s_" +  uploadFileName));
+				
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+					
+					thumbnail.close();
+					
+				}
 				
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -81,6 +94,7 @@ public class UploadController {
 		}
 	}
 	
+	//오늘의 날짜를 경로로 만들어 문자열로 반환 
 	private String getFolder() {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -90,6 +104,19 @@ public class UploadController {
 	
 		}
 	
+	//이미지 타입인지 검사하는 메서드 
+	private boolean checkImageType(File file) {
+		
+		try {
+			String contentType = Files.probeContentType(file.toPath());
+			
+			return contentType.startsWith("image");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 	
 
 }
