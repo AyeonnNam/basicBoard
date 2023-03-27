@@ -29,10 +29,28 @@
 <script>
 	$(document).ready(function(){
 		
+		var uploadResult = $(".uploadResult ul");
+		
+			function showUploadedFile(uploadResultArr){
+				
+				var str= "";
+				
+				$(uploadResultArr).each(function(i, obj){
+					
+					str += "<li> " + obj.fileName + " </li>"; 
+					
+				});
+				
+				uploadResult.append(str);
+				
+			}	
+		
+		
+		
 		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 		var maxSize = 5242880; //5mb
 		
-		function checkExtension(fileName, fileSize){
+			function checkExtension(fileName, fileSize){
 			
 			if(fileSize >= maxSize){
 				alert("파일 사이즈 초과");
@@ -45,6 +63,7 @@
 			return true;
 			
 		}
+		
 		
 		
 			/* <input type='file'>은 readOnly라 안쪽내용 수정 불가능, 
@@ -82,6 +101,8 @@
 				success : function(result){
 					console.log(result);
 					alert("Uploaded");
+					
+					showUploadedFile(result);
 					
 					$(".uploadDiv").html(cloneObj.html());
 				}
