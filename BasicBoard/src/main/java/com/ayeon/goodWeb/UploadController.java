@@ -3,6 +3,7 @@ package com.ayeon.goodWeb;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.http.HttpHeaders;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -114,6 +116,32 @@ public class UploadController {
 		
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
+	
+	@GetMapping("/display")
+	@ResponseBody
+		public ResponseEntity<byte[]> getFile(String fileName){
+			
+			log.info("------------------- fileName : " + fileName);
+			File file = new File("/Users/nam-ayeon/Desktop/untitledfolder/temp" +  fileName);
+			log.info("--------------- file ------------- " +  file);
+			
+			ResponseEntity<byte[]> result = null;
+			
+			try {
+				
+				
+				org.springframework.http.HttpHeaders header = new org.springframework.http.HttpHeaders();
+				header.add("Content-Type",Files.probeContentType(file.toPath()));
+				result = new ResponseEntity<byte[]>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+				
+			}catch (Exception e) {
+				
+				e.printStackTrace();
+				// TODO: handle exception
+			}
+			
+			return result;
+		}
 	
 	//오늘의 날짜를 경로로 만들어 문자열로 반환 
 	private String getFolder() {

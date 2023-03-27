@@ -11,13 +11,34 @@
 	<div class='uploadDiv'>
 		<input type='file' name='uploadFile' multiple>
 	</div>
-	
+	<style>
+.uploadResult {
+	width: 100%;
+	background-color: pink;
+}
+
+.uploadResult ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.uploadResult ul li {
+	list-style: none;
+	padding: 10px;
+}
+
+.uploadResult ul li img {
+	width: 20px;
+}
+</style>
 	<div class='uploadResult'>
 		<ul>
-		
+
 		</ul>
 	</div>
-	
+
 	<button id='uploadBtn'>Upload</button>
 
 
@@ -26,7 +47,7 @@
 		crossorigin="anonymous"></script>
 
 
-<script>
+	<script>
 	$(document).ready(function(){
 		
 		var uploadResult = $(".uploadResult ul");
@@ -37,7 +58,13 @@
 				
 				$(uploadResultArr).each(function(i, obj){
 					
-					str += "<li> " + obj.fileName + " </li>"; 
+					if(!obj.image){
+						
+						str+= "<li><img src='/resources/img/png-transparent-heart-heart-thumbnail.png'> " 
+									+ obj.fileName + "</li>";
+					}else{
+						str += "<li> " + obj.fileName + " </li>"; 
+					}
 					
 				});
 				
