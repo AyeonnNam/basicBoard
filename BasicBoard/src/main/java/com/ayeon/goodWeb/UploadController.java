@@ -3,6 +3,7 @@ package com.ayeon.goodWeb;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.http.HttpHeaders;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
@@ -119,8 +120,8 @@ public class UploadController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
-	@GetMapping("/display")
-	@ResponseBody
+		@GetMapping("/display")
+		@ResponseBody
 		public ResponseEntity<byte[]> getFile(String fileName){
 			
 			log.info("------------------- fileName : " + fileName);
@@ -155,7 +156,19 @@ public class UploadController {
 			
 			log.info("-----resource-------" + resource);
 			
-			return null;
+			String resourceName = resource.getFilename();
+			
+			org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
+			
+			try {
+				
+				headers.add("Content-Disposition", "attachment; fileName=" + new String(resourceName.getBytes("UTF-8"), "ISO-8859-1"));
+				
+			}catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			
+			return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 			
 		}
 		
