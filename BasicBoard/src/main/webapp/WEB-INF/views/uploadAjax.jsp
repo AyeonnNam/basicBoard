@@ -12,7 +12,7 @@
 		<input type='file' name='uploadFile' multiple="multiple">
 	</div>
 
-
+	<button id='uploadBtn'>Upload</button>
 	<style>
 .uploadResult {
 	width: 100%;
@@ -33,31 +33,30 @@
 
 .uploadResult ul li img {
 	width: 20px;
-	
-}	
+}
+
 .bigPictureWrapper {
 	position: absolute;
 	display: none;
 	justify-content: center;
-	align-items: center;
-	top: 0%;
-	width:100%;
-	height:100%;
+	align-items: center; top : 0%;
+	width: 100%;
+	height: 100%;
 	background-color: gray;
 	z-index: 100;
-	background-color:rgba(255,255,255,0.5);	
+	background-color: rgba(255, 255, 255, 0.5);
+	top: 0%;
 }
 
-.bigPicture{
-
+.bigPicture {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.bigPicture img{
-	width:600px;
+.bigPicture img {
+	width: 600px;
 }
 </style>
 
@@ -67,10 +66,10 @@
 		</ul>
 	</div>
 
-	<div cass='bigPictureWrapper'>
+	<div class='bigPictureWrapper'>
 		<div class='bigPicture'></div>
 	</div>
-	<button id='uploadBtn'>Upload</button>
+
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -86,10 +85,30 @@
 		
 		$(".bigPictureWrapper").css("display","flex").show();
 		
+		
+		
 		$(".bigPicture")
-						.html("<img src='/display?fileName=" + encodeURI(fileCallPath)+"'>")
-						.animate({width:'100%', height: '100%'},1000);
+						.html("<img src='/display?fileName=" + encodeURI(fileCallPath)+"'>");
+						//.animate({width:'100%', height: '100%'},1000);
+		
+		
+		//<div>이벤트 처리 
+		$(".bigPictureWrapper").on("click",function(e){
+			
+			//$(".bigPicture").animate({width:'0%', height:'0%'},1000);
+			
+			
+			setTimeout(()=> {
+				
+				$(this).hide();
+				
+			});
+			
+		});
 	}
+	
+	
+	
 	
 	$(document).ready(function(){
 		
