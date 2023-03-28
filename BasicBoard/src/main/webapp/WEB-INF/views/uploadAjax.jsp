@@ -11,14 +11,14 @@
 	<div class='uploadDiv'>
 		<input type='file' name='uploadFile' multiple="multiple">
 	</div>
-	
-	
+
+
 	<style>
 .uploadResult {
 	width: 100%;
 	background-color: pink;
 }
-
+£
 .uploadResult ul {
 	display: flex;
 	flex-flow: row;
@@ -33,15 +33,42 @@
 
 .uploadResult ul li img {
 	width: 20px;
+	
+}	
+.bigPictureWrapper {
+	position: absolute;
+	display: none;
+	justify-items: center;
+	top: 0%;
+	width:100%;
+	height:100%;
+	background-color: pink;
+	z-index: 100;
+	background-color:rgba(255,255,255,0.5);	
+}
+
+.bigPicture{
+
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.bigPicture img{
+	width:600px;
 }
 </style>
-	
+
 	<div class='uploadResult'>
 		<ul>
 
 		</ul>
 	</div>
 
+	<div cass='bigPictureWrapper'>
+		<div class='bigPicture'></div>
+	</div>
 	<button id='uploadBtn'>Upload</button>
 
 
@@ -51,6 +78,12 @@
 
 
 	<script>
+	
+	function showImage(fileCallPath){
+		
+		alert(fileCallPath);
+	}
+	
 	$(document).ready(function(){
 		
 		var uploadResult = $(".uploadResult ul");
@@ -73,7 +106,12 @@
 						
 						var fileCallPath = encodeURIComponent(obj.uploadPath+ "/s_" +obj.uuid+ "_" + obj.fileName);
 						
-						str += "<li><img src='/display?fileName="+fileCallPath+"'></li>";
+						var originPath = obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
+						
+						originPath = originPath.replace(new RegExp(/\\/g),"/");
+						
+						
+						str += "<li><a href=\"javascript:showImage(\'" + originPath +"\')\"><img src='/display?fileName="+fileCallPath+"'></li>";
 					}
 					
 				});
@@ -100,6 +138,7 @@
 			return true;
 			
 		}
+		
 		
 		
 		
