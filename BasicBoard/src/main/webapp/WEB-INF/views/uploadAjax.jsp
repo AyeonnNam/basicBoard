@@ -13,6 +13,16 @@
 	</div>
 
 	<button id='uploadBtn'>Upload</button>
+	
+		<div class='uploadResult'>
+		<ul>
+
+		</ul>
+	</div>
+
+	<div class='bigPictureWrapper'>
+		<div class='bigPicture'></div>
+	</div>
 	<style>
 .uploadResult {
 	width: 100%;
@@ -60,15 +70,7 @@
 }
 </style>
 
-	<div class='uploadResult'>
-		<ul>
 
-		</ul>
-	</div>
-
-	<div class='bigPictureWrapper'>
-		<div class='bigPicture'></div>
-	</div>
 
 
 
@@ -221,6 +223,30 @@
 			}); //$.ajax
 			
 		});	
+		
+		//'x' 표시에 대한 이벤트 처리 
+		$(".uploadResult").on("click","span", function(e){
+			
+			var targetFile = $(this).data("file");
+			
+			var type = $(this).data("type");
+			console.log(targetFile);
+			
+			$.ajax({
+				
+				url: '/deleteFile',
+				data; {fileNmae: targetFile, type:type},
+				dataType: 'text',
+				type: 'POST',
+				success: function(result){
+					alert(result);
+					
+				}
+				
+			}); //$.ajax
+			
+		});
+		
 	});
 </script>
 
