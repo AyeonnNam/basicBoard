@@ -48,28 +48,25 @@ public class UploadController {
 
 		List<AttachFileDTO> list = new ArrayList<AttachFileDTO>();
 		
-		//업로드될폴더 
+		
 		String uploadFolder = "/Users/nam-ayeon/Desktop/untitledfolder/temp";
 		String uploadFolderPath = getFolder();
 		
-		//makeFolder
+		
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
 		log.info(" -- upload Path: --  " + uploadPath);
 		if(uploadPath.exists() == false) {
 			
 			uploadPath.mkdirs();
-		}//make yyyy/MM/dd folder 
+		}
 		
 		for (MultipartFile multipartFile : uploadFile) {
 
-			/*log.info("..............................................");
-			log.info("UploadFileName: " + multipartFile.getOriginalFilename());
-			log.info("UploadFileSize: " + multipartFile.getSize());
-			*/
+			
 
 			AttachFileDTO attachDTO = new AttachFileDTO();
 			
-			//업로드될파일이름 
+			
 			String uploadFileName = multipartFile.getOriginalFilename();
 			
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
@@ -78,12 +75,10 @@ public class UploadController {
 			
 			log.info(uploadFileName);
 			
-//			log.info("only file name : " + uploadFileName);
 
 			UUID uuid = UUID.randomUUID();
 			
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
-			log.info("uploadFileName" + uploadFileName);
 
 			try {
 				File saveFile = new File(uploadPath,uploadFileName);
@@ -107,7 +102,6 @@ public class UploadController {
 					
 				}
 				
-				// add to list
 				list.add(attachDTO);
 				
 			} catch (Exception e) {
@@ -124,9 +118,7 @@ public class UploadController {
 		@ResponseBody
 		public ResponseEntity<byte[]> getFile(String fileName){
 			
-			log.info("------------------- fileName : " + fileName);
 			File file = new File("/Users/nam-ayeon/Desktop/untitledfolder/temp/" +  fileName);
-			log.info("--------------- file ------------- " +  file);
 			
 			ResponseEntity<byte[]> result = null;
 			
