@@ -54,7 +54,7 @@ public class UploadController {
 		
 		
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
-		log.info(" -- upload Path: --  " + uploadPath);
+
 		if(uploadPath.exists() == false) {
 			
 			uploadPath.mkdirs();
@@ -73,7 +73,6 @@ public class UploadController {
 
 			attachDTO.setFileName(uploadFileName);
 			
-			log.info(uploadFileName);
 			
 
 			UUID uuid = UUID.randomUUID();
@@ -137,6 +136,8 @@ public class UploadController {
 			
 			return result;
 		}
+		
+		
 		//다운로드
 		@GetMapping(value= "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE )
 		@ResponseBody

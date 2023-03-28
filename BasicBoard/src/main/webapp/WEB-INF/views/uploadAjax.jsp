@@ -75,8 +75,8 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		crossorigin="anonymous"></script>
-
-
+	
+	
 	<script>
 	
 	function showImage(fileCallPath){
@@ -126,7 +126,9 @@
 
 						str+= "<li><a href='/download?fileName="+fileCallPath+"'>"
 								+"<img src='/resources/img/png-transparent-heart-heart-thumbnail.png'> " 
-									+ obj.fileName + "</li>";
+									+ obj.fileName + "</a>" + 
+									" <span data-file= \'"+fileCallPath+"\' data-type='file'>x</span>" 
+									+ "<div></li>";
 					}else{
 						//str += "<li> " + obj.fileName + " </li>"; 
 						
@@ -139,7 +141,11 @@
 						//originPath = originPath.replace(new RegExp(/\\/g),"/");
 						
 						
-						str += "<li><a href=\"javascript:showImage(\'" + originPath +"\')\"><img src='/display?fileName="+fileCallPath+"'></li>";
+						str += "<li><a href=\"javascript:showImage(\'" + originPath +"\')\"><img src='/display?fileName="+fileCallPath+"'></a>"
+								+"<span data-file=\'"+fileCallPath+"\' data-type='image'>x</span>" + "<li>";
+								
+								
+								
 					}
 					
 				});
