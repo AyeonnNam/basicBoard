@@ -77,17 +77,18 @@ public class UploadController {
 
 			attachDTO.setFileName(uploadFileName);
 			
-			
+			log.info(uploadFileName);
 			
 //			log.info("only file name : " + uploadFileName);
 
 			UUID uuid = UUID.randomUUID();
 			
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
-			
+			log.info("uploadFileName" + uploadFileName);
 
 			try {
 				File saveFile = new File(uploadPath,uploadFileName);
+
 				multipartFile.transferTo(saveFile);
 				
 				attachDTO.setUuid(uuid.toString());
@@ -145,24 +146,27 @@ public class UploadController {
 			
 			return result;
 		}
-	
+		//다운로드
 		@GetMapping(value= "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE )
 		@ResponseBody
 		public ResponseEntity<Resource> downloadFile(String fileName){
 			
-			log.info("------------ download file ----------------- " + fileName);
 			
-			Resource resource = new FileSystemResource("/Users/nam-ayeon/Desktop/untitledfolder/temp/" +fileName);
+			FileSystemResource resource = new FileSystemResource("/Users/nam-ayeon/Desktop/untitledfolder/temp/" +fileName);
 			
-			log.info("-----resource-------" + resource);
 			
 			String resourceName = resource.getFilename();
+			
+			//removeUUID 
+			String resourceOriginalName = resourceName.substring(resourceName.indexOf("_")+1);
+			//log.info("--- resourceOriginalName --- : " + resourceOriginalName);
 			
 			org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
 			
 			try {
 				
-				headers.add("Content-Disposition", "attachment; fileName=" + new String(resourceName.getBytes("UTF-8"), "ISO-8859-1"));
+				headers.add("Content-Disposition", "attachment; fileName=" + new String(resourceOriginalName.getBytes("UTF-8"), "ISO-8859-1"));
+	
 				
 			}catch (UnsupportedEncodingException e) {
 				e.printStackTrace();

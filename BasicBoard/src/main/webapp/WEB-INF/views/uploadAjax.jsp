@@ -9,8 +9,10 @@
 <body>
 	<h1>upload With Ajax</h1>
 	<div class='uploadDiv'>
-		<input type='file' name='uploadFile' multiple>
+		<input type='file' name='uploadFile' multiple="multiple">
 	</div>
+	
+	
 	<style>
 .uploadResult {
 	width: 100%;
@@ -33,6 +35,7 @@
 	width: 20px;
 }
 </style>
+	
 	<div class='uploadResult'>
 		<ul>
 
@@ -60,7 +63,10 @@
 					
 					if(!obj.image){
 						
-						str+= "<li><img src='/resources/img/png-transparent-heart-heart-thumbnail.png'> " 
+						var fileCallPath = encodeURIComponent(obj.uploadPath+ "/" +obj.uuid+ "_" + obj.fileName);
+
+						str+= "<li><a href='/download?fileName="+fileCallPath+"'>"
+								+"<img src='/resources/img/png-transparent-heart-heart-thumbnail.png'> " 
 									+ obj.fileName + "</li>";
 					}else{
 						//str += "<li> " + obj.fileName + " </li>"; 
