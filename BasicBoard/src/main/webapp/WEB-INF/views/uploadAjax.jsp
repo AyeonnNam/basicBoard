@@ -235,7 +235,7 @@
 			$.ajax({
 				
 				url: '/deleteFile',
-				data; {fileNmae: targetFile, type:type},
+				data: {fileName: targetFile, type:type},
 				dataType: 'text',
 				type: 'POST',
 				success: function(result){

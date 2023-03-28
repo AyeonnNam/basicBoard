@@ -178,7 +178,7 @@ public class UploadController {
 			
 			try {
 				
-				file = new File("/Users/nam-ayeon/Desktop/untitledfolder/temp" + URLDecoder.decode(fileName,"UTF-8"));
+				file = new File("/Users/nam-ayeon/Desktop/untitledfolder/temp/" + URLDecoder.decode(fileName,"UTF-8"));
 				
 				file.delete();
 				
