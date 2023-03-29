@@ -69,6 +69,25 @@
 
 </div>
 
+<script>
+	$(document).ready(function(e){
+		
+		var formObj = $("form[role='form']");
+		
+		$("button[type='submit']").on("click", function(e){
+			
+			e.preventDefault();
+			
+			console.log("submit clicked");
+			
+			
+		});
+		
+		
+	});
+
+</script>
+
 <style>
 .uploadResult {
 	width: 100%;
