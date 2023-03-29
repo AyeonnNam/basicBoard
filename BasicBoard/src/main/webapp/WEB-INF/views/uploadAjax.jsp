@@ -204,7 +204,8 @@
 			}
 			
 			$.ajax({
-				url: '${pageContext.request.contextPath}/uploadAjaxAction',
+				//url: '${pageContext.request.contextPath}/uploadAjaxAction',
+				url: '/uploadAjaxAction',
 				processData : false,
 				contentType : false,
 				data : formData,
