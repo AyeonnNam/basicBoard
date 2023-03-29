@@ -69,6 +69,28 @@
 
 </div>
 
+<style>
+.uploadResult {
+	width: 100%;
+	background-color: pink;
+}
 
+.uploadResult ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.uploadResult ul li {
+	list-style: none;
+	padding: 10px;
+}
+
+.uploadResult ul li img {
+	width: 20px;
+}
+
+</style>
 
 <%@include file="../includes/footer.jsp"%>
