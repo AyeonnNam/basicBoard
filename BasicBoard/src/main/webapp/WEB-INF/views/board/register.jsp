@@ -34,10 +34,6 @@
 				<button type="submit" class="btn btn-default">Submit Button</button>
 
 				<button type="reset" class="btn btn-default">Reset Button</button>
-
-
-
-
 			</div>
 		</div>
 	</div>
@@ -69,8 +65,85 @@
 
 </div>
 
+<style>
+.uploadResult {
+	width: 100%;
+	background-color: pink;
+}
+
+.uploadResult ul {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.uploadResult ul li {
+	list-style: none;
+	padding: 10px;
+}
+
+.uploadResult ul li img {
+	width: 20px;
+}
+
+</style>
+
 <script>
+
 	$(document).ready(function(e){
+		
+		
+		$(".uploadResult").on("click", "button", function(e){
+			
+			console.log("delete file");
+			
+		});
+		
+		
+		var uploadUL = $(".uploadResult ul");
+		
+		function showUploadResult(uploadResultArr){
+			
+			if(!uploadResultArr || uploadResultArr.length == 0){ return; }
+			
+			
+			var str = "";
+			
+			$(uploadResultArr).each(function(i, obj){
+				
+				if(obj.image){
+					
+					var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid
+							
+							+ "_" + obj.fileName);	
+					
+					str += "<li><div>";
+					str += "<span> " + obj.fileName+ "</span>";
+					str += "<button type= 'button' class= 'btn btn-warning btn-circle'><i class='fa fa-times'></li></i></button><br>";
+					str += "<img src ='/display?fileName=" +fileCallPath+ "'>";
+					str += "</div>";
+					str += "</li>"; 
+					
+					
+				}else{
+					
+					var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid
+							
+							+ "_" + obj.fileName);	
+					
+					str +="<li><div>";
+					str +="<span> " +  obj.fileName + "</span>";
+					str += "<button type= 'button' class= 'btn btn-default btn-circle'><i class='fa fa-times'></li></i></button><br>";
+					str += "<img src ='/resources/img/png-transparent-heart-heart-thumbnail.png'></a>";
+					str += "</div>";
+					str += "</li>";
+				}
+			});
+			
+			uploadUL.append(str);
+			
+		}
 		
 		var formObj = $("form[role='form']");
 		
@@ -104,6 +177,8 @@
 			
 		}
 		
+		
+		
 	$("input[type='file']").change(function(e){
 		
 		var formData = new FormData();
@@ -127,7 +202,7 @@
 			dataType:'json',
 			success: function(result){
 				console.log(result);
-				
+				showUploadResult(result);
 				
 			}
 			
@@ -141,29 +216,11 @@
 	});
 
 </script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+	
+	
 
-<style>
-.uploadResult {
-	width: 100%;
-	background-color: pink;
-}
-
-.uploadResult ul {
-	display: flex;
-	flex-flow: row;
-	justify-content: center;
-	align-items: center;
-}
-
-.uploadResult ul li {
-	list-style: none;
-	padding: 10px;
-}
-
-.uploadResult ul li img {
-	width: 20px;
-}
-
-</style>
 
 <%@include file="../includes/footer.jsp"%>
