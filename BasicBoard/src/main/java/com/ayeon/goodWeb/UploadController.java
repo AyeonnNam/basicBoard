@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ayeon.domain.AttachFileDTO;
+import com.ayeon.domain.BoardAttachVO;
 
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -43,11 +44,11 @@ public class UploadController {
 	
 	@ResponseBody
 	@PostMapping(value = "/uploadAjaxAction", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+	public ResponseEntity<List<BoardAttachVO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 
 		log.info("update ajax post..............");
 
-		List<AttachFileDTO> list = new ArrayList<AttachFileDTO>();
+		List<BoardAttachVO> list = new ArrayList<BoardAttachVO>();
 		
 		
 		String uploadFolder = "/Users/nam-ayeon/Desktop/untitledfolder/temp";
@@ -65,14 +66,14 @@ public class UploadController {
 
 			
 
-			AttachFileDTO attachDTO = new AttachFileDTO();
+			BoardAttachVO attachVO = new BoardAttachVO();
 			
 			
 			String uploadFileName = multipartFile.getOriginalFilename();
 			
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 
-			attachDTO.setFileName(uploadFileName);
+			attachVO.setFileName(uploadFileName);
 			
 			
 
@@ -85,13 +86,13 @@ public class UploadController {
 
 				multipartFile.transferTo(saveFile);
 				
-				attachDTO.setUuid(uuid.toString());
-				attachDTO.setUploadPath(uploadFolderPath);
+				attachVO.setUuid(uuid.toString());
+				attachVO.setUploadPath(uploadFolderPath);
 				
 				
 				if(checkImageType(saveFile)) {
 					
-					attachDTO.setImage(true);
+					attachVO.setFileType(true);
 					
 					FileOutputStream thumbnail 
 					= new FileOutputStream(new File(uploadPath, "s_" +  uploadFileName));
@@ -102,7 +103,7 @@ public class UploadController {
 					
 				}
 				
-				list.add(attachDTO);
+				list.add(attachVO);
 				
 			} catch (Exception e) {
 				// TODO: handle exception

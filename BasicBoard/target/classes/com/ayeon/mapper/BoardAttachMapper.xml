@@ -5,8 +5,8 @@
 <mapper namespace="com.ayeon.mapper.BoardAttachMapper"> 
 
 	<insert id="insert">
-			insert into tbl_attach (uuid, uploadPath, filename, filetype, bno)
-			values(#{uuid}, #{uploadPath}, #{filename}, #{filetype}, #{bno})
+			insert into tbl_attach (uuid, uploadPath, fileName, filetype, bno)
+			values(#{uuid}, #{uploadPath}, #{fileName}, #{filetype}, #{bno})
 	</insert>
 		
 		

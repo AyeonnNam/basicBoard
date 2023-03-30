@@ -17,7 +17,7 @@
 			<div class="panel-heading">Board Register</div>
 			<div class="panel-body">
 
-				<form role="form" action="/board/register" method="post"></form>
+				<form role="form" action="/board/register" method="post">
 				<div class="form-group">
 					<label>Title</label> <input class="form-control" name='title'>
 				</div>
@@ -64,7 +64,7 @@
 	</div>
 
 </div>
-
+</form>
 <style>
 .uploadResult {
 	width: 100%;
@@ -94,12 +94,6 @@
 	$(document).ready(function(e){
 		
 		
-		$(".uploadResult").on("click", "button", function(e){
-			
-			console.log("delete file");
-			
-		});
-		
 		
 		var uploadUL = $(".uploadResult ul");
 		
@@ -118,9 +112,11 @@
 							
 							+ "_" + obj.fileName);	
 					
-					str += "<li><div>";
+					str += "<li data-path='"+obj.uploadPath+"'";
+					str += "data-uuid='" + obj.uuid +"' data-fileName='"+ obj.fileName +"'data-type='" + obj.image+"'"
+					str += "><div>";
 					str += "<span> " + obj.fileName+ "</span>";
-					str += "<button type= 'button' class= 'btn btn-warning btn-circle'><i class='fa fa-times'></li></i></button><br>";
+					str += "<button type= 'button' data-file=\'"+fileCallPath+"\' data-type='image' class= 'btn btn-default btn-circle btn-xs'><i class='fa fa-times' style='font-size:20px'></li></i></button><br>";
 					str += "<img src ='/display?fileName=" +fileCallPath+ "'>";
 					str += "</div>";
 					str += "</li>"; 
@@ -132,9 +128,13 @@
 							
 							+ "_" + obj.fileName);	
 					
-					str +="<li><div>";
+					str +="<li " 
+					str += "data-path='" + obj.uploadPath+ "' data-uuid=' "+obj.uuid +"' data-fileName=' "
+							+obj.fileName+ "' data-type='" +obj.image+"' ><div>";
 					str +="<span> " +  obj.fileName + "</span>";
-					str += "<button type= 'button' class= 'btn btn-default btn-circle'><i class='fa fa-times'></li></i></button><br>";
+					str += "<button type= 'button' data-file=\'"
+								+ fileCallPath +
+								"\'data-type='file' class= 'btn btn-default btn-circle btn-xs'><i class='fa fa-times' style='font-size:20px'></li></i></button><br>";
 					str += "<img src ='/resources/img/png-transparent-heart-heart-thumbnail.png'></a>";
 					str += "</div>";
 					str += "</li>";
@@ -146,14 +146,26 @@
 		}
 		
 		var formObj = $("form[role='form']");
-		
+		//등록 버튼 누룰 때 
 		$("button[type='submit']").on("click", function(e){
 			
+			
 			e.preventDefault();
+			var str ="";
+		
+			$(".uploadResult ul li").each(function(i, obj){
+				
+				var jobj = $(obj);
+				console.dir(jobj);
+				
+				str +="<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("fileName")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].uuid' value ='" +jobj.data("uuid") +"'>";
+				str += "<input type='hidden' name='attachList["+i+"].uploadPath'  value='" + jobj.data("path")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].fileType'  value= '" + jobj.data("type")+"'>";
+			});
 			
-			console.log("submit clicked");
-			
-			
+			formObj.append(str).submit();
+				
 		});
 		
 		
@@ -211,6 +223,31 @@
 		
 	});	
 		
+	
+	// 삭제 버튼 
+	$(".uploadResult").on("click", "button", function(e){
+		
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
+		var targetLi = $(this).closest("li");
+		
+		$.ajax({
+			
+			url: '/deleteFile',
+			data: {fileName: targetFile, type:type},
+			dataType: 'text',
+			type: 'POST',
+			success: function(result){
+				alert(result);
+				targetLi.remove();
+			}
+			
+			
+		}); //$.ajax
+	
+		
+	});
+	
 		
 		
 	});
