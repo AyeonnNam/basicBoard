@@ -69,11 +69,11 @@ public class UploadController {
 			
 			String uploadFileName = multipartFile.getOriginalFilename();
 			
-			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+			//uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 
 			attachVO.setFileName(uploadFileName);
 			
-			
+			log.info("---- fileName ---- " +  uploadFileName);
 
 			UUID uuid = UUID.randomUUID();
 			
