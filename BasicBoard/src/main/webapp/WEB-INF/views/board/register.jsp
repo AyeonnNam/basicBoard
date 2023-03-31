@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; cahrset=UTF-8"
 	pageEncoding="UTF-8"%>"
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http //www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -18,6 +19,7 @@
 			<div class="panel-body">
 
 				<form role="form" action="/board/register" method="post">
+				
 				<div class="form-group">
 					<label>Title</label> <input class="form-control" name='title'>
 				</div>
@@ -34,6 +36,8 @@
 				<button type="submit" class="btn btn-default">Submit Button</button>
 
 				<button type="reset" class="btn btn-default">Reset Button</button>
+				</form>
+				
 			</div>
 		</div>
 	</div>
@@ -47,7 +51,7 @@
 			<div class="panel-heading">File Attach</div>
 			<div class="panel-body">
 				<div class="form-group uploadDiv">
-					<input type="file" name="uploadFile" multiple>
+					<input type="file"  name="uploadFile" multiple>
 				</div>
 
 				<div class='uploadResult'>
@@ -64,7 +68,6 @@
 	</div>
 
 </div>
-</form>
 <style>
 .uploadResult {
 	width: 100%;
@@ -89,9 +92,39 @@
 
 </style>
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		crossorigin="anonymous"></script>
+	
+
 <script>
 
 	$(document).ready(function(e){
+		
+		var formObj = $("form[role='form']");
+		//등록 버튼 누룰 때 
+		$("button[type='submit']").on("click", function(e){
+			
+			//첨부파일 관련된 처리를 할 수 있도록 기본 동작 막기 
+			e.preventDefault();
+			console.log("submit clicked");
+			var str ="";
+		
+			$(".uploadResult ul li").each(function(i, obj){
+				
+				var jobj = $(obj);
+				console.dir(jobj);
+				
+				str +="<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("fileName")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].uuid' value ='" +jobj.data("uuid") +"'>";
+				str += "<input type='hidden' name='attachList["+i+"].uploadPath'  value='" + jobj.data("path")+"'>";
+				str += "<input type='hidden' name='attachList["+i+"].fileType'  value= '" + jobj.data("type")+"'>";
+			});
+			
+			formObj.append(str).submit();
+				
+		});
+		
 		
 		
 		
@@ -145,28 +178,6 @@
 			
 		}
 		
-		var formObj = $("form[role='form']");
-		//등록 버튼 누룰 때 
-		$("button[type='submit']").on("click", function(e){
-			
-			
-			e.preventDefault();
-			var str ="";
-		
-			$(".uploadResult ul li").each(function(i, obj){
-				
-				var jobj = $(obj);
-				console.dir(jobj);
-				
-				str +="<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("fileName")+"'>";
-				str += "<input type='hidden' name='attachList["+i+"].uuid' value ='" +jobj.data("uuid") +"'>";
-				str += "<input type='hidden' name='attachList["+i+"].uploadPath'  value='" + jobj.data("path")+"'>";
-				str += "<input type='hidden' name='attachList["+i+"].fileType'  value= '" + jobj.data("type")+"'>";
-			});
-			
-			formObj.append(str).submit();
-				
-		});
 		
 		
 		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
@@ -206,7 +217,7 @@
 		
 		$.ajax({
 			
-			url: '/uploadAjaxAction',
+			url: '${pageContext.request.contextPath}/uploadAjaxAction',
 			processData: false,
 			contentType: false,
 			data:formData,
@@ -253,10 +264,7 @@
 	});
 
 </script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-		crossorigin="anonymous"></script>
-	
+
 	
 
 

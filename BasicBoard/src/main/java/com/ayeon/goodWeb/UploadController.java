@@ -44,11 +44,11 @@ public class UploadController {
 	
 	@ResponseBody
 	@PostMapping(value = "/uploadAjaxAction", produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<List<BoardAttachVO>> uploadAjaxPost(MultipartFile[] uploadFile) {
+	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 
 		log.info("update ajax post..............");
 
-		List<BoardAttachVO> list = new ArrayList<BoardAttachVO>();
+		List<AttachFileDTO> list = new ArrayList<AttachFileDTO>();
 		
 		
 		String uploadFolder = "/Users/nam-ayeon/Desktop/untitledfolder/temp";
@@ -64,9 +64,7 @@ public class UploadController {
 		
 		for (MultipartFile multipartFile : uploadFile) {
 
-			
-
-			BoardAttachVO attachVO = new BoardAttachVO();
+			AttachFileDTO attachVO = new AttachFileDTO();
 			
 			
 			String uploadFileName = multipartFile.getOriginalFilename();
@@ -92,7 +90,7 @@ public class UploadController {
 				
 				if(checkImageType(saveFile)) {
 					
-					attachVO.setFileType(true);
+					attachVO.setImage(true);
 					
 					FileOutputStream thumbnail 
 					= new FileOutputStream(new File(uploadPath, "s_" +  uploadFileName));
