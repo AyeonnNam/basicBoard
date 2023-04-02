@@ -17,6 +17,7 @@ public class BoardVO {
 	//댓글의 숫자를 의미하는 인스턴스 변수추가 
 	private int replyCnt;
 	
+	//첨부파일 
 	private List<BoardAttachVO> attachList;
 	
 }
