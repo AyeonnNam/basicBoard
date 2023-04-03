@@ -416,7 +416,31 @@
 		
 		
 </script>
-
+<script>
+	
+	$(document).ready(function(){
+		
+	
+	(function(){
+		
+		var bno = '<c:out value="${board.bno}"/>';
+		
+		$.getJSON();//
+		
+		
+		
+		
+		
+		
+		
+	})();
+	
+	
+	
+	});
+	}
+	
+</script>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -440,7 +464,7 @@ $(document).ready(function(){
 	
 	
 	
-})
+});
 
 </script>
 
