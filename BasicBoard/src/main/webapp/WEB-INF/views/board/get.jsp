@@ -68,7 +68,7 @@
 <style>
 .uploadResult {
 	width: 100%;
-	background-color: pink;
+	background-color: white;
 }
 
 .uploadResult ul {
@@ -523,23 +523,113 @@
 	 */
 </script>
 <script>
-	$(document).ready(function() {
+	$(document)
+			.ready(
+					function() {
 
-		(function() {
+						(function() {
 
-			var bno = '<c:out value="${board.bno}"/>';
+							var bno = '<c:out value="${board.bno}"/>';
 
-			$.getJSON("/board/getAttachList", {
-				bno : bno
-			}, function(arr) {
+							$
+									.getJSON(
+											"/board/getAttachList",
+											{
+												bno : bno
+											},
+											function(arr) {
 
-				console.log(arr);
+												console.log(arr);
 
-			});//end getjson
+												var str = "";
 
-		})();//end function
+												$(arr)
+														.each(
+																function(i,
+																		attach) {
 
-	});
+																	//image Type 
+																	if (attach.fileType) {
+
+																		var fileCallPath = encodeURIComponent(attach.uploadPath
+																				+ "/s_"
+																				+ attach.uuid
+																				+ "_"
+																				+ attach.fileName);
+
+																		str += "<li data-path='"  +attach.uploadPath+ 
+										"' data-uuid='" + attach.uuid + 
+												"' data-filename='" + attach.fileName+ "' data-type='" + attach.fileType +"'><div>";
+																		str += "<img src = '/display?fileName="
+																				+ fileCallPath
+																				+ "'>";
+																		str += "<div>";
+																		str
+																				+ "</li>";
+																	} else {
+
+																		str += "<li data-path='" +  attach.uploadPath  +
+										"' data-uuid='" + attach.uuid+ 
+												"' data-filename='" + attach.fileName+ 
+														"' data-type= '" + attach.fileType+ "' ><div>";
+																		str += "<span>"
+																				+ attach.fileName
+																				+ "</span><br/>";
+																		str += "<img src='/resources/img/docu.jpeg'>";
+																		str += "</div>";
+																		str += "</li>";
+																	}
+
+																});
+
+												$(".uploadResult ul").html(str);
+
+											});//end getjson
+
+						})();//end function
+
+						$(".uploadResult").on(
+								"click",
+								"li",
+								function(e) {
+									console.log("view image");
+									var liObj = $(this);
+
+									var path = encodeURIComponent(liObj
+											.data("path")
+											+ "/"
+											+ liObj.data("uuid")
+											+ "_"
+											+ liObj.data("filename"));
+
+									if (liObj.data("type")) {
+										showImage(path.replace(new RegExp(/\\/g), "/"));
+									} else {
+										//download
+										self.location = "/download?fileName="
+												+ path
+
+									}
+
+								});
+						
+						function showImage(fileCallPath){
+							alert(fileCallPath);
+							$(".bigPictureWrapper").css("display","flex").show();
+							$(".bigPicture").html("<img src='/display?fileName=" + fileCallPath+ "'>");
+						}
+						
+						$(".bigPictureWrapper").on("click", function(e){
+								setTimeout(function(){
+									
+									$('.bigPictureWrapper').hide();
+								}, 300);
+								
+						
+						});
+						
+
+					});
 </script>
 
 <script type="text/javascript">
