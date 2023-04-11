@@ -1,5 +1,8 @@
 package com.ayeon.goodWeb;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -85,12 +88,17 @@ public class BoardController {
 //		rttr.addAttribute("type", cri.getType());
 //		rttr.addAttribute("keyword", cri.getKeyword());
 		return "redirect:/board/list" + cri.getListLink();
-	}
+	}                                                 
 
 	@PostMapping("/remove")
-	public String delete(@RequestParam("bno") Long bno,@ModelAttribute("cri")Criteria cri, RedirectAttributes rttr) {
+	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri")Criteria cri, RedirectAttributes rttr) {
 		log.info("/delete");
+		
+		List<BoardAttachVO> attachList = service.getAttachList(bno);
+		
 		if (service.remove(bno)) {
+			
+			deleteFiles(attachList);
 			rttr.addFlashAttribute("result", "success");
 		}
 //		rttr.addAttribute("pageNum", cri.getPageNum());
@@ -109,6 +117,43 @@ public class BoardController {
 		log.info(" ---- getAttachList  ---- bno : " + bno);
 		return new ResponseEntity<List<BoardAttachVO>>(service.getAttachList(bno), HttpStatus.OK);
 		
+	}
+	
+	public void deleteFiles(List<BoardAttachVO> attachList) {
+		
+		if(attachList == null || attachList.size() == 0) {
+			return;
+		}
+		
+		log.info("delete attach files..................");
+		log.info( " --------------- attachList ---------------- " + attachList);
+		
+		attachList.forEach(attach -> {
+			
+			try {
+				
+				Path file = Paths.get("/Users/nam-ayeon/Desktop/untitledfolder/temp/"
+							+ attach.getUploadPath() 
+								+ "/" 
+									+ attach.getUuid()	+ "_" + attach.getFileName());
+				
+				Files.deleteIfExists(file);
+				
+				if(Files.probeContentType(file).startsWith("image")) {
+					
+					 Path thumbNail = Paths.get("/Users/nam-ayeon/Desktop/untitledfolder/temp/"
+								+ attach.getUploadPath() 
+									+ "/s_" 
+										+ attach.getUuid()	+ "_" + attach.getFileName());
+					 Files.delete(thumbNail);
+				}
+			
+			}catch (Exception e) {
+				log.error("delete file error" + e.getMessage());
+			}//end catch
+			
+		});//end forEach
+	
 	}
 
 }

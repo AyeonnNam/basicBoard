@@ -14,38 +14,37 @@ import com.ayeon.mapper.BoardMapper;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @Service
 
 public class BoardServiceImpl implements BoardService {
 
-	@Setter(onMethod_ = @Autowired )
+	@Setter(onMethod_ = @Autowired)
 	private BoardMapper mapper;
-	
-	@Setter(onMethod_ = @Autowired )
+
+	@Setter(onMethod_ = @Autowired)
 	private BoardAttachMapper attachMapper;
 
 	@Transactional
 	@Override
 	public void register(BoardVO board) {
 		log.info("register........." + board);
-		
+
 		mapper.insertSelectKey(board);
-		
-		if(board.getAttachList() ==null || board.getAttachList().size() <=0) {
-			return ;
-			
+
+		if (board.getAttachList() == null || board.getAttachList().size() <= 0) {
+			return;
+
 		}
-		
+
 		board.getAttachList().forEach(attach -> {
 			attach.setBno(board.getBno());
 			attachMapper.insert(attach);
 		});
-		
+
 	}
 
-	
-	
 	@Override
 	public BoardVO get(Long bno) {
 		// TODO Auto-generated method stub
@@ -59,10 +58,10 @@ public class BoardServiceImpl implements BoardService {
 //	}
 
 	@Override
-	public List<BoardVO> getList(Criteria cri){
+	public List<BoardVO> getList(Criteria cri) {
 		return mapper.listWithPaging(cri);
 	}
-	
+
 	@Override
 	public boolean modify(BoardVO board) {
 
@@ -71,24 +70,23 @@ public class BoardServiceImpl implements BoardService {
 
 	}
 
+	@Transactional
 	@Override
 	public boolean remove(Long bno) {
 		log.info("delete............." + bno);
-
+		attachMapper.deleteAll(bno);
 		return mapper.delete(bno) == 1;
 	}
 
 	@Override
 	public int getTotal(Criteria cri) {
-		
+
 		return mapper.getTotalCount(cri);
 	}
 
-
-
 	@Override
 	public List<BoardAttachVO> getAttachList(Long bno) {
-		
+
 		return attachMapper.findByBno(bno);
 	}
 

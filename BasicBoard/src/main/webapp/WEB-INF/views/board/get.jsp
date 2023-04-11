@@ -628,7 +628,17 @@
 						
 						});
 						
-
+						$(".bigPictureWrapper").on("click", function(e){
+							
+							setTimeout(function(){
+								$(".bigPictureWrapper").hide();		
+							},300);
+							
+						});
+						
+			
+						
+						
 					});
 </script>
 

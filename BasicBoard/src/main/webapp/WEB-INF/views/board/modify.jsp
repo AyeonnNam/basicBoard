@@ -86,10 +86,10 @@
 				var typeTag = $("input[name= 'type']").clone();
 				
 				formObj.empty;
-				//formObj.append(pageNumTag);
-				//formObj.append(amountTag);
-				//formObj.append(keywordTag);
-				//formObj.append(typeTag);
+				formObj.append(pageNumTag);
+				formObj.append(amountTag);
+				formObj.append(keywordTag);
+				formObj.append(typeTag);
 				/* self.location = "/board/list";
 					return; */
 			}
