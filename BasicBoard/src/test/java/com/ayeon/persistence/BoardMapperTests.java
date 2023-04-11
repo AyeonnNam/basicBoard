@@ -26,8 +26,8 @@ public class BoardMapperTests {
 	BoardMapper mapper;
 	
 	
-	@Test
-	public void testSearch() {
+	//@Test
+	//public void testSearch() {
 //		Criteria cri = new Criteria();
 //		cri.setKeyword("ss");
 //		cri.setType("TC");
@@ -35,12 +35,12 @@ public class BoardMapperTests {
 //		List<BoardVO> boardVOs = mapper.listWithPaging(cri);
 //		boardVOs.forEach(board -> log.info(board));
 //		
-		Criteria cri2 = new Criteria();
-		cri2.setKeyword("가나다");
-		cri2.setType("T");
-				log.info("---------------- 단일 검색 ----------------------");
-		List<BoardVO> boardVOs2 = mapper.listWithPaging(cri2);
-		boardVOs2.forEach(board -> log.info(board));
+//		Criteria cri2 = new Criteria();
+//		cri2.setKeyword("가나다");
+//		cri2.setType("T");
+//				log.info("---------------- 단일 검색 ----------------------");
+//		List<BoardVO> boardVOs2 = mapper.listWithPaging(cri2);
+//		boardVOs2.forEach(board -> log.info(board));
 //		
 //		Criteria cri3 = new Criteria();
 //		cri3.setPageNum(2);
@@ -48,7 +48,7 @@ public class BoardMapperTests {
 //		log.info("--------------- 검색 조건이 없는 경우 --------------" );
 //		List<BoardVO> boardList = mapper.listWithPaging(cri3);
 //		boardList.forEach(board -> log.info(board));
-	}
+//	}
 
 	
 	//	
@@ -103,13 +103,13 @@ public class BoardMapperTests {
 //	}
 //	
 //	
-//	@Test
-//	public void testDelete() {
-//		
-//		int delete = mapper.delete(11L);
-//		log.info("지워졌나요 : " +delete);
-//		
-//	}
+	@Test
+	public void testDelete() {
+		
+		int delete = mapper.delete(54531513L);
+		log.info("지워졌나요 : " +delete);
+		
+	}
 //	
 //	@Test
 //	public void testUpdate() {

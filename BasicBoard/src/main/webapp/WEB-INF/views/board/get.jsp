@@ -528,14 +528,14 @@
 					function() {
 
 						(function() {
+							var bnoValue = '<c:out value= "${board.bno}"/>';
 
-							var bno = '<c:out value="${board.bno}"/>';
 
 							$
 									.getJSON(
 											"/board/getAttachList",
 											{
-												bno : bno
+												bno : bnoValue
 											},
 											function(arr) {
 
@@ -628,13 +628,7 @@
 						
 						});
 						
-						$(".bigPictureWrapper").on("click", function(e){
-							
-							setTimeout(function(){
-								$(".bigPictureWrapper").hide();		
-							},300);
-							
-						});
+						
 						
 			
 						

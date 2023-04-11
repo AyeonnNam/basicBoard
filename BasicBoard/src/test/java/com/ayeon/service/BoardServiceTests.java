@@ -47,15 +47,15 @@ public class BoardServiceTests {
 //		
 //	}
 	
-	@Test
-	public void testGetList() {
-		
-		Criteria cri = new Criteria(2,10);
-		//log.info("..................................." + cri.getPageNum());
-		//log.info("................................." + cri.getSkip());
-		service.getList(cri).forEach(board-> log.info(board));
-	}
-	
+//	@Test
+//	public void testGetList() {
+//		
+//		Criteria cri = new Criteria(2,10);
+//		//log.info("..................................." + cri.getPageNum());
+//		//log.info("................................." + cri.getSkip());
+//		service.getList(cri).forEach(board-> log.info(board));
+//	}
+//	
 //	@Test
 //	public void testUpdate() {
 //		BoardVO board = service.get(1L);
@@ -67,11 +67,11 @@ public class BoardServiceTests {
 //		service.modify(board);
 //	}
 //	
-//	@Test
-//	public void testDelete() {
-//		
-//		log.info("REMOVE RESULT......................: " + service.remove(3L));
-//	}
+	@Test
+	public void testDelete() {
+		
+		log.info("REMOVE RESULT......................: " + service.remove(54531517L));
+	}
 	
 
 }
