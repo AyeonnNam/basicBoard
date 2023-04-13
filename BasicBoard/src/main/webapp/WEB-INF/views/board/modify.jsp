@@ -200,6 +200,9 @@
 										"'data-uuid='" +  attach.uuid + 
 											"' data-filename='"+ attach.fileName+ "' data-type= '"
 												+ attach.fileType+ "' ><div>";
+						str +="<span>" + attach.fileName + "</span>";
+						str +="<button type='button' data-file=\'" + fileCallPath+ "\' data-type='image'";
+						str +="class='btn btn-default btn-circle btn-xs'><i class='fa fa-times'></i></button><br>";
 						str +="<img src ='/display?fileName="+fileCallPath+"'>";
 						str +="</div>";
 						str +="</li>";
@@ -211,6 +214,8 @@
 							"' data-filename='"+ attach.fileName+ "' data-type= '"
 								+ attach.fileType+ "' ><div>";
 						str += "<span> " + attach.fileName + "</span><br/>";
+						str +="<button type='button' data-file=\'" + fileCallPath+ "\' data-type='file'";
+						str +="class='btn btn-default btn-circle btn-xs'><i class='fa fa-times'></i></button><br>";
 						str += "<img src='/resources/img/docu.jpeg'></a>";
 						str += "</div>";
 						str += "</li>";
@@ -226,7 +231,24 @@
 				
 			}); //end getjson
 			
+			
+		
+			
 		})(); //end function 
+		
+		//삭제 버튼 눌렀을 때 화면에서 사라지는 기능(삭제 누르고 변경취소할 시를 위해)
+		$(".uploadResult").on("click","button",function(e){
+			
+			console.log("delete file");
+			
+			if(confirm("Remove this file?")){
+				
+				var targetLi = $(this).closest("li");
+				targetLi.remove();
+			}
+			
+		});
+		
 		
 	});
 </script>
