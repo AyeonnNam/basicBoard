@@ -4,6 +4,8 @@
 	xmlns:security="http://www.springframework.org/schema/security"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="customAccessDenied"
+		class="com.ayeon.security.CustomAccessDeniedHandler"></bean>
 
 
 	<security:http auto-config="true" use-expressions="true">
@@ -12,18 +14,17 @@
 			access="permitAll" />
 		<security:intercept-url
 			pattern="/sample/member" access="hasRole('ROLE_MEMBER')" />
-		<security:intercept-url
-			pattern="/sample/admin" access="hasRole('ROLE_ADMIN')" />
+		<security:intercept-url pattern="/sample/admin"
+			access="hasRole('ROLE_ADMIN')" />
+
+		<!-- <security:access-denied-handler error-page="/accessError"/> -->
+		<security:access-denied-handler
+			ref="customAccessDenied" />
+		<!-- <security:form-login /> -->
+		<security:form-login login-page="/customLogin" />
 
 
-		<security:form-login />
-		
-		
-	<!-- <security:access-denied-handler error-page="/accessError"/>  -->
-	
-	<security:access-denied-handler ref="customAccessDenied"/>
-	
-	
+
 	</security:http>
 
 	<security:authentication-manager>
@@ -32,10 +33,10 @@
 			<security:user-service>
 				<security:user name="member" password="{noop}member"
 					authorities="ROLE_MEMBER" />
-					
+
 				<security:user name="admin" password="{noop}admin"
 					authorities="ROLE_MEMBER, ROLE_ADMIN" />
-			
+
 			</security:user-service>
 
 		</security:authentication-provider>
