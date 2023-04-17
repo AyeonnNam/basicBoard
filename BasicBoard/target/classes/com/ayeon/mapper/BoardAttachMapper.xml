@@ -24,5 +24,11 @@
 	
 		delete from tbl_attach where bno = #{bno}
 	</delete>
+	
+	<select id="getOldFiles" resultType="com.ayeon.domain.BoardAttachVO">
+	
+		select * from tbl_attach where uploadPath = DATE_FORMAT(now() -1,'yyyy\mm\dd')
+	</select>
+	
 
 </mapper>

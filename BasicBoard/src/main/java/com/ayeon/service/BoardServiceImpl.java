@@ -62,12 +62,27 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.listWithPaging(cri);
 	}
 
+	@Transactional
 	@Override
 	public boolean modify(BoardVO board) {
 
 		log.info("modify............." + board);
-		return mapper.update(board) == 1;
+		//해당 첨부파일 전체 삭제 
+		attachMapper.deleteAll(board.getBno());
+		//해당 게시물 업데이트 
+		boolean modifyResult = mapper.update(board) == 1;
+		// 
+		if(modifyResult && board.getAttachList() != null && board.getAttachList().size() > 0) {
+			
+			board.getAttachList().forEach(attach -> {
+				
+				attach.setBno(board.getBno());
+				attachMapper.insert(attach);
+				
+			});
+		}
 
+		return modifyResult;
 	}
 
 	@Transactional
