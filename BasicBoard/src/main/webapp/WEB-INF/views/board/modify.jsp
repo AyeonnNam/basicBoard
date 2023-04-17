@@ -129,8 +129,6 @@
 				</div>
 				<div class='uploadResult'>
 					<ul>
-
-
 					</ul>
 				</div>
 			</div>
@@ -171,6 +169,20 @@
 				//formObj.append(typeTag);
 				/* self.location = "/board/list";
 					return; */
+			}else if(operation === 'modify'){
+				console.log("submit clicked");
+				var str ="";
+				$(".uploadResult ul li").each(function(i, obj){
+					
+					var jobj = $(obj);
+					console.dir(jobj);
+					
+					str += "<input type='hidden' name='attachList[" + i + "].fileName' value='" + jobj.data("filename")+"'>";
+					str += "<input type='hidden' name='attachList[" + i + "].uuid' value='" + jobj.data("uuid")+ "'>";
+					str += "<input type='hidden' name='attachList[" + i + "].uploadPath' value='"+jobj.data("path")+"'>";
+					str += "<input type='hidden' name='attachList[" + i + "].fileType' value='"+jobj.data("type")+"'>";
+				});
+				formObj.append(str).submit();
 			}
 
 			formObj.submit();
@@ -248,6 +260,107 @@
 			}
 			
 		});
+		
+		//첨부파일 추가 
+		/* 첨부파일 추가는 기존의 게시물 등록시와 동일하다.
+		서버에 파일 업로드하고
+		이를 화면에 섬네일이나 파일의 아이콘으로 보이게 처리한다.*/
+		
+		var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+		var maxSize = 5242880;
+		
+		function checkExtension(filename, fileSize){
+			
+			if(fileSize >= maxSize){
+				
+				alert("파일 사이즈 초과");
+				return false;
+				
+			}if(regex.test(filename)){
+				
+				alert("해당 종류의 파일은 업로드가 가능하지 않다.");
+				
+			}
+			return true;
+			
+		}
+		
+		$("input[type='file']").change(function(e){
+			
+			var formData = new FormData();
+			var inputFile =$("input[name='uploadFile']");
+			var files = inputFile[0].files;
+			for(var i=0; i< files.length; i++){
+				
+				if(!checkExtension(files[i].name, files[i].size)){
+					return false;
+				}
+			formData.append("uploadFile", files[i]);	
+				
+			}
+			
+			$.ajax({
+				
+				url: '/uploadAjaxAction',
+				processData: false,
+				contentType: false,
+				data: formData,
+				type: 'POST',
+				dataType: 'json',
+				success: function(result){
+					console.log(result);
+					showUploadResult(result);
+				}
+			
+			}); //$.ajax
+		});
+			
+		var uploadUL = $(".uploadResult ul");
+		
+		function showUploadResult(uploadResultArr){
+			
+			if(!uploadResultArr || uploadResultArr.length == 0){
+				return;
+			}
+			var str ="";
+			
+			$(uploadResultArr).each(function(i, obj){
+				
+				if(obj.image){
+					
+					var fileCallPath = 
+						encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" +obj.fileName);
+					
+					str += "<li data-path='"+ obj.uploadPath+"'";
+					str += "data-uuid='" + obj.uuid+"' data-fileName='" + obj.fileName + "'data-type='" + obj.image + "'"
+					str += "><div>";
+					str += "<span>" + obj.fileName + "</span>";
+					str += "<button type= 'button' data-file=\'" + fileCallPath + 
+							"\' data-type='image' class= 'btn btn-default btn-circle btn-xs'><i class='fa fa-times' style='font-size:20px'></li></i></button><br>";
+					str += "<img src ='/dispaly?fileName=" + fileCallPath+ "'>";
+					str += "</div>";
+					str += "</li>";
+				
+				}else{
+					
+					var fileCallPath = 
+						encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" +obj.fileName);
+				
+					str += "<li "
+					str += "data-path='" + obj.uploadPath+ "' data-uuid=' " +obj.uuid + "' data-fileName='" 
+							+obj.fileName + "'data-type='" + obj.image + "'><div>";
+					str +="<span>" + obj.fileName + "</span>";
+					str +="<button type= 'button' data-file=\'" + fileCallPath + 
+							"\'data-type='file' class= 'btn btn-default btn-circle btn-xs'><i class='fa fa-times' style='font-size:20px'></li></i></button><br>";
+					str +="<img src ='/resources/img/docu.jpeg'></a>";
+					str += "</div>";
+					str += "</li>";
+				}
+			});
+			
+			uploadUL.append(str);
+		}		
+			
 		
 		
 	});

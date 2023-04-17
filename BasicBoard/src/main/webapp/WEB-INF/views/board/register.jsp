@@ -168,7 +168,7 @@
 					str += "<button type= 'button' data-file=\'"
 								+ fileCallPath +
 								"\'data-type='file' class= 'btn btn-default btn-circle btn-xs'><i class='fa fa-times' style='font-size:20px'></li></i></button><br>";
-					str += "<img src ='/resources/img/docu.jpeg£'></a>";
+					str += "<img src ='/resources/img/docu.jpeg'></a>";
 					str += "</div>";
 					str += "</li>";
 				}
