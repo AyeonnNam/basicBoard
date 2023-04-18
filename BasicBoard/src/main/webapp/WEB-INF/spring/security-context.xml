@@ -6,6 +6,8 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="customAccessDenied"
 		class="com.ayeon.security.CustomAccessDeniedHandler"></bean>
+<bean id="customLoginSuccess"
+		class="com.ayeon.security.CustomLoginSuccessHandler"></bean>
 
 
 	<security:http auto-config="true" use-expressions="true">
@@ -21,7 +23,7 @@
 		<security:access-denied-handler
 			ref="customAccessDenied" />
 		<!-- <security:form-login /> -->
-		<security:form-login login-page="/customLogin" />
+		<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess" />
 
 
 
