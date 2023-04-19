@@ -68,7 +68,7 @@ public class MemberTests {
 				if(conn != null) {try { conn.close();} catch (Exception e) {}}
 			}
 			
-		}//end for
+		}//end for // 
 		
 		
 	}
