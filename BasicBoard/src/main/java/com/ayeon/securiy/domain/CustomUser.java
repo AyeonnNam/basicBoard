@@ -9,6 +9,9 @@ import org.springframework.security.core.userdetails.User;
 
 import com.ayeon.domain.MemberVO;
 
+import lombok.Data;
+
+@Data
 public class CustomUser extends User {
 
 	/**
