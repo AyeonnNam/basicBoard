@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>"
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <%@include file="../includes/header.jsp"%>
 
@@ -35,9 +36,17 @@
 				<label>Writer</label><input class="form-control" name='writer'
 					value='<c:out value="${board.writer }"/>' readonly="readonly">
 			</div>
-
-			<button data-oper='modify' class="btn btn-default"
+			
+			<sec:authentication property="principal" var="pinfo"/>
+			<sec:authorize access="isAuthenticated()">
+				<c:if test="${pinfo.username eq board.writer}">
+				
+				<button data-oper='modify' class="btn btn-default"
 				onclick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">Modify</button>
+				</c:if>
+			</sec:authorize>
+
+			
 
 			<button data-oper='list' class="btn btn-info"
 				onclick="location.href='/board/list'">List</button>
@@ -139,8 +148,11 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<i class="fa fa-comments fa-fw"></i> Reply
+				
+				<sec:authorize access="isAuthenticated()">
 				<button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New
 					Reply</button>
+					</sec:authorize>
 			</div>
 
 			<!--  panel-heading -->

@@ -25,6 +25,11 @@ public class CustomUserDetailsService implements UserDetailsService{
 		
 	log.warn("queried by member mapper:  " + vo);
 	
+	
+	if(vo == null ) {
+		log.info("============== null ============ " );
+	}
+	
 	return vo ==null ? null: new CustomUser(vo);
 	
 	}

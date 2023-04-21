@@ -6,8 +6,8 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="customAccessDenied"
 		class="com.ayeon.security.CustomAccessDeniedHandler"></bean>
-	<bean id="customLoginSuccess"
-		class="com.ayeon.security.CustomLoginSuccessHandler"></bean>
+	<!-- <bean id="customLoginSuccess"
+		class="com.ayeon.security.CustomLoginSuccessHandler"></bean> -->
 	<!-- <bean id="customPasswordEncoder" class="com.ayeon.security.CustomNoOpPasswordEncoder"></bean> -->
 	<bean id="bcryptPasswodEncoder"
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
@@ -25,13 +25,17 @@
 		<security:access-denied-handler
 			ref="customAccessDenied" />
 		<!-- <security:form-login /> -->
-		<security:form-login login-page="/customLogin"
-			authentication-success-handler-ref="customLoginSuccess" />
+		<!-- <security:form-login login-page="/customLogin"
+			authentication-success-handler-ref="customLoginSuccess" /> -->
+		 <security:form-login login-page="/customLogin" /> 
+			
 
 		<security:logout logout-url="/customLogout"
 			invalidate-session="true" delete-cookies="remember-me,JESSON-ID"/>
 
 		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
+		
+		<security:csrf disabled="true"></security:csrf>
 	</security:http>
 
 
