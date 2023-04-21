@@ -24,8 +24,14 @@
 			<input type='text' name='username' value='admin'>
 		</div>
 
+		
 		<div>
 			<input type='text' name='password' value='admin'>
+		</div>
+		
+		<div>
+			<input type='checkbox' name='remember-me'> 자동로그인 설정
+		
 		</div>
 		<div>
 			<input type='submit'>

@@ -29,7 +29,7 @@
 			authentication-success-handler-ref="customLoginSuccess" />
 
 		<security:logout logout-url="/customLogout"
-			invalidate-session="true" />
+			invalidate-session="true" delete-cookies="remember-me,JESSON-ID"/>
 
 		<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
 	</security:http>
