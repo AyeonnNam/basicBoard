@@ -80,6 +80,7 @@ public class BoardController {
 		model.addAttribute("board", service.get(bno));
 	}
 
+	@PreAuthorize("principal.username == #board.writer")
 	@PostMapping("/modify")
 	public String modify(BoardVO board, @ModelAttribute("cri")Criteria cri, RedirectAttributes rttr) {
 		log.info("/update..");
@@ -93,6 +94,7 @@ public class BoardController {
 		return "redirect:/board/list" + cri.getListLink();
 	}                                                 
 
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") Long bno, @ModelAttribute("cri")Criteria cri, RedirectAttributes rttr) {
 		log.info("/delete");
