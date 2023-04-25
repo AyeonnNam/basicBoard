@@ -368,6 +368,19 @@
 						var modalModBtn = $("#modalModBtn");
 						var modalRemoveBtn = $("#modalRemoveBtn");
 						var modalRegisterBtn = $("#modalRegisterBtn");
+						
+						var replyer = null;
+						
+						<sec:authorize access="isAuthenticated()">
+						
+						replyer = '<sec:authentication property="principal.username"/>';
+						
+						</sec:authorize>
+						
+						var csrfHeaderName = "${_csrf.headerName}";
+						var csrfTokenValue = "${_csrf.token}";
+						
+						
 
 						//조회화면에 댓글 등록하기 버튼 누를 시 
 						$("#addReplyBtn").on("click", function(e) {
@@ -381,6 +394,12 @@
 							$(".modal").modal("show");
 						});
 
+						$(document).ajaxSend(function(e, xhr, options) {
+							
+							xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+							
+						});
+						
 						//모달창 내 댓글 등록 버튼 누룰  
 						modalRegisterBtn.on("click", function(e) {
 

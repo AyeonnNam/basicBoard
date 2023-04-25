@@ -21,9 +21,10 @@
 			<div class="panel-heading">Board Register</div>
 			<div class="panel-body">
 
+
 				<form role="form" action="/board/register" method="post">
-				<input type="hidden" name="${csrf.parametertName}" value="${csrf.token}"/>
-				
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
 
 					<div class="form-group">
 						<label>Title</label> <input class="form-control" name='title'>
@@ -34,15 +35,14 @@
 						<textarea class="form-control" rows="3" name='content'></textarea>
 					</div>
 
-				<!--  <div class="form-group">
-					<label>Writer</label> <input class="form-control" name='writer'>
-				</div> -->
- 
+					
+
 
 					<div class="form-group">
-						<label>Writer</label> 
-						<input class="form-control" name='writer' value='<sec:authentication property="principal.username"/>' readonly="readonly">
-					</div> 
+						<label>Writer</label> <input class="form-control" name='writer'
+							value='<sec:authentication property="principal.username"/>'
+							readonly="readonly">
+					</div>
 
 					<button type="submit" class="btn btn-default">Submit
 						Button</button>
@@ -83,7 +83,7 @@
 <style>
 .uploadResult {
 	width: 100%;
-	background-color: pink;
+	background-color: white;
 }
 
 .uploadResult ul {
@@ -247,6 +247,9 @@
 
 						}
 
+						var csrfHeaderName = "${_csrf.headerName}";
+						var csrfTokenValue = "${_csrf.token}";
+
 						$("input[type='file']")
 								.change(
 										function(e) {
@@ -271,6 +274,17 @@
 														url : '${pageContext.request.contextPath}/uploadAjaxAction',
 														processData : false,
 														contentType : false,
+
+														beforeSend : function(
+																xhr) {
+															//변수처리 안하고 직접 넣음 
+															/* xhr
+																	.setRequestHeader(
+																			"${_csrf.headerName}",
+																			"${_csrf.token}"); */
+															xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+
+														},
 														data : formData,
 														type : 'POST',
 														dataType : 'json',
@@ -286,29 +300,40 @@
 										});
 
 						// 삭제 버튼 
-						$(".uploadResult").on("click", "button", function(e) {
+						$(".uploadResult").on(
+								"click",
+								"button",
+								function(e) {
 
-							var targetFile = $(this).data("file");
-							var type = $(this).data("type");
-							var targetLi = $(this).closest("li");
+									var targetFile = $(this).data("file");
+									var type = $(this).data("type");
+									var targetLi = $(this).closest("li");
 
-							$.ajax({
+									$.ajax({
 
-								url : '/deleteFile',
-								data : {
-									fileName : targetFile,
-									type : type
-								},
-								dataType : 'text',
-								type : 'POST',
-								success : function(result) {
-									alert(result);
-									targetLi.remove();
-								}
+										url : '/deleteFile',
+										data : {
+											fileName : targetFile,
+											type : type
+										},
 
-							}); //$.ajax
+										beforeSend : function(xhr) {
+											//변수처리 안하고 직접 넣음 
+											/* xhr.setRequestHeader(
+													"${_csrf.headerName}",
+													"${_csrf.token}"); */
+											xhr.setRequestHeader(csrfHeaderName,csrfTokenValue);
+										},
+										dataType : 'text',
+										type : 'POST',
+										success : function(result) {
+											alert(result);
+											targetLi.remove();
+										}
 
-						});
+									}); //$.ajax
+
+								});
 
 					});
 </script>
