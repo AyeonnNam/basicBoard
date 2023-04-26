@@ -58,18 +58,21 @@ public class ReplyController {
 		return new ResponseEntity<ReplyVO>(service.get(rno), HttpStatus.OK);
 	}
 
-	@DeleteMapping(value = "/{rno}", produces = { MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> remove(@PathVariable("rno") Long rno) {
+	@PreAuthorize("principal.username == #vo.replyer")
+	@DeleteMapping(value = "/{rno}")
+	public ResponseEntity<String> remove(@RequestBody ReplyVO vo, @PathVariable("rno") Long rno) {
 		log.info("remove............" + rno);
-		return service.remove(rno) == 1 ? new ResponseEntity<String>("success", HttpStatus.OK)
-				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
+		log.info("replyer:........ "  + vo.getReplyer());
+		return service.remove(rno) == 1 
+				? new ResponseEntity<>("success", HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@PreAuthorize("principal.username == #vo.replyer")
 	@RequestMapping(method = { RequestMethod.PUT,
-			RequestMethod.PATCH }, value = "/{rno}", consumes = "application/json", produces = {
-					MediaType.TEXT_PLAIN_VALUE })
+			RequestMethod.PATCH }, value = "/{rno}", consumes = "application/json")
 	public ResponseEntity<String> modify(@PathVariable("rno") Long rno, @RequestBody ReplyVO vo) {
-		vo.setRno(rno);
+		//vo.setRno(rno);
 		log.info("rno: ...................." + rno);
 		log.info("modify:................." + vo);
 

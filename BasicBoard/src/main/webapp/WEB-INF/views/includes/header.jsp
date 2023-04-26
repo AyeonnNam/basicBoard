@@ -1,6 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
 
+<%@ page language="java" contentType="text/html; cahrset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<!DOCTYPE html>
+
+
+	
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Simple게시판</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +56,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+                <a class="navbar-brand" href="/board/list">게시판</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -72,7 +77,9 @@
                                 <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
                             </a>
                         </li>
-                        <li class="divider"></li>
+                       
+                     	
+                     	
                         <li>
                             <a href="#">
                                 <div>
@@ -256,8 +263,12 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
+                     	<sec:authorize access="isAuthenticated()">
+                     	<li><a href="/customLogout"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
+                     	</sec:authorize>
+                     	<sec:authorize access="isAnonymous()">
+                     	<li><a href="/customLogin"><i class="fa fa-sign-out fa-fw"></i>Login</a></li>
+                     	</sec:authorize>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>
