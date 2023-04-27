@@ -24,5 +24,10 @@
 		 where mem.userid = #{userid};	
 	</select>
 
+
+	<insert id="insert">
+  		insert into tbl_member (userid, userpw, userName, enabled) values(#{userid},#{userpw},#{userName},1);
+	</insert>
+
 </mapper> 
   

@@ -23,13 +23,25 @@ public class MemberMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private MemberMapper mapper;
 	
+//	@Test
+//	public void readTest() {
+//		
+//		
+//		MemberVO vo = mapper.read("admin91");
+//		log.info(" === vo ===  : " + vo );
+//		vo.getAuthList().forEach(authVO -> log.info(authVO));
+//	}
+	
 	@Test
-	public void readTest() {
+	public void insertTest() {
 		
+		MemberVO member = new MemberVO();
+		member.setUserName("웹개발자아연");
+		member.setUserid("ayeon02");
+		member.setUserpw("123");
+		mapper.insert(member);
+		log.info(" - - - - member - - -  : " + member);
 		
-		MemberVO vo = mapper.read("admin91");
-		log.info(" === vo ===  : " + vo );
-		vo.getAuthList().forEach(authVO -> log.info(authVO));
-	}
+		}
 	
 }
