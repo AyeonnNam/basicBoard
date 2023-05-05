@@ -3,6 +3,7 @@ package com.ayeon.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ayeon.domain.AuthVO;
 import com.ayeon.domain.MemberVO;
 import com.ayeon.mapper.MemberMapper;
 
@@ -25,6 +26,17 @@ public class MemberServiceImpl implements MemberService {
 		
 		
 	}
+
+	@Override
+	public void memberAuth(AuthVO auth) {
+		
+		log.info("---- 멤버 권한 주기 성공 ----- " + auth);
+		
+		mapper.insertAuth(auth);
+		
+	}
+	
+	
 	
 	
 	

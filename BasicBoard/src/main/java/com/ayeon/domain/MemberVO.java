@@ -10,6 +10,7 @@ import lombok.Setter;
 @Data
 
 public class MemberVO {
+	private Long mno;
 	private String userid;
 	private String userpw;
 	private String userName;

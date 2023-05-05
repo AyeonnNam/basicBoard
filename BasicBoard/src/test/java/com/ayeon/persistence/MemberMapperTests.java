@@ -15,9 +15,7 @@ import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Log4j
-@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml"
- )
-
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class MemberMapperTests {
 
 	@Setter(onMethod_ = @Autowired)
@@ -32,16 +30,40 @@ public class MemberMapperTests {
 //		vo.getAuthList().forEach(authVO -> log.info(authVO));
 //	}
 	
-	@Test
+	
+	//@Test
+	public void testRead() {
+		
+		MemberVO vo = mapper.read("PurpleBoost04");
+		
+		log.info(" -- 권한  -- : " + vo.getAuthList());
+		
+	}
+	
+	//@Test
 	public void insertTest() {
 		
 		MemberVO member = new MemberVO();
-		member.setUserName("웹개발자아연");
-		member.setUserid("ayeon02");
-		member.setUserpw("123");
+		
+		member.setUserName("bbb");
+		member.setUserid("sss");
+		member.setUserpw("sdfdf");
 		mapper.insert(member);
 		log.info(" - - - - member - - -  : " + member);
 		
 		}
+	
+	@Test
+	public void insertAuthTest() {
+		
+		AuthVO auth = new AuthVO();
+		//auth.setAuth("ROLE_USER");
+		auth.setUserid("sss");
+		mapper.insertAuth(auth);
+		log.info("-------- authVO --------" +  auth);
+		
+		}
+	
+	
 	
 }

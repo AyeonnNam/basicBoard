@@ -37,7 +37,7 @@ public class MemberServiceTests {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testJoin() {
 		
 		MemberVO member =new  MemberVO();
@@ -58,5 +58,26 @@ public class MemberServiceTests {
 		log.info(" - -- - - member ----------------- " +member);
 		
 	}
+	
+	@Test
+	public void testAuth() {
+		
+		AuthVO auth = new AuthVO();
+		auth.setUserid("PurpleBoost04");
+		auth.setAuth("ROLE_MANAGER");
+		service.memberAuth(auth);
+		log.info(" - - - - - -권한 주기 성공 - - - - - " );
+		
+		
+		
+	}
+	
+//	@Test
+//	public void testRead() {
+//		
+//		service.
+//		
+//		}
+	
 	
 }
