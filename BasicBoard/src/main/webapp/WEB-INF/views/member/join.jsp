@@ -24,10 +24,11 @@
                         
                             <fieldset>
                                 <div class="form-group"><label>ID</label>
-                                    <input class="id_input" name="userid" type="text">
+                                 <input class="form-control" id= "id_input" name="userid"> 
                                     <span class="id_input_re_1">사용 가능한 아이디입니다.</span>
                                    <span class="id_input_re_2">이미 이용 중인 아이디입니다.</span>
-                                </div>
+                               
+                                   </div>
                                 <div class="form-group"><label>PW</label>
                                     <input class="form-control" name="userpw">
                                 </div>
@@ -67,14 +68,15 @@
 			});
 			
 			//아이디 중복 검사 
-			$('.id_input').on("input", function(){
+			$('#id_input').on("input", function(){
 				
 				//console.log("keyUp 테스트");
-				var inputID = $('.id_input').val();
-				var data = {inputID:inputID};
+				var userid = $('#id_input').val();
+				var data = {userid:userid};
 				
 				$.ajax({
 					type : 'POST',
+					//url 수정 후 ajax 동작 
 				 	url : '${pageContext.request.contextPath}/member/memberIdChk',
 				 	data: data,
 				 	beforeSend : function(
