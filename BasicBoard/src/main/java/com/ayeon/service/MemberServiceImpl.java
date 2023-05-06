@@ -35,6 +35,14 @@ public class MemberServiceImpl implements MemberService {
 		mapper.insertAuth(auth);
 		
 	}
+
+	@Override
+	public int idCheck(String userid) {
+		// TODO Auto-generated method stub
+		return mapper.idCheck(userid);
+	}
+	
+	
 	
 	
 	

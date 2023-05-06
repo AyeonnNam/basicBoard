@@ -33,10 +33,15 @@
   		insert into tbl_member (mno, userid, userpw, userName, enabled) values((SELECT nextval('sec_member') FROM DUAL),#{userid},#{userpw},#{userName},1)
 	</insert>
 	
-	<insert id="insertAuth">
-	
+	<insert id="insertAuth">	
 		insert into tbl_member_auth (userid, auth) values(#{userid}, 'ROLE_USER')
 	</insert>
+
+	<!-- resultType 명시 주의 -->
+	<select id="idCheck" resultType= "int">
+	select count(*) from tbl_member where userid = #{userid};
+	</select>
+
 
 </mapper> 
   

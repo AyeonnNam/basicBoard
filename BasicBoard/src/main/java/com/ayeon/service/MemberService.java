@@ -14,6 +14,5 @@ public interface MemberService {
 	
 	public void memberAuth(AuthVO vo);
 	
-//	public MemberVO memberRead(MemberVO vo);
-
+	public int idCheck(String userid);
 }

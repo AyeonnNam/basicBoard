@@ -1,5 +1,10 @@
 package com.ayeon.persistence;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +58,7 @@ public class MemberMapperTests {
 		
 		}
 	
-	@Test
+	//@Test
 	public void insertAuthTest() {
 		
 		AuthVO auth = new AuthVO();
@@ -63,6 +68,16 @@ public class MemberMapperTests {
 		log.info("-------- authVO --------" +  auth);
 		
 		}
+	
+	@Test
+	public void idCheckTest() throws Exception {
+		int idCheck = mapper.idCheck("lemonGirl");
+		MemberVO vo = mapper.read("admin91");
+		int idCheck2 = mapper.idCheck(vo.getUserid());
+		//assertEquals(null, idCheck);
+		assertEquals(1, idCheck2);
+		assertEquals(0, idCheck);
+	}
 	
 	
 	

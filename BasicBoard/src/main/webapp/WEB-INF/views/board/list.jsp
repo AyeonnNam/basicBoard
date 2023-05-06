@@ -157,9 +157,10 @@
 						//class
 						$(".modal-body").html(
 								"게시글" + parseInt(result) + " 번이 등록되었습니다.");
+						//id
+						$("#myModal").modal("show");
 					}
-					//id
-					$("#myModal").modal("show");
+					
 				}
 				
 				
