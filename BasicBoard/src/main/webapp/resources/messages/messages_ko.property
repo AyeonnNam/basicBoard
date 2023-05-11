@@ -1,0 +1,6 @@
+@NotNull.userVO.userid = 아이디 입력 필수입니다.
+@Length.userVO.userid = 최소 2글자 이상입니다.
+@NotNull.userVO.userpw = 비밀번호 입력은 필수입니다.
+@Length.userVO.userpw = 최소 2글자 이상입니다.
+@NotNull.userVO.userName = 이름 입력은 필수입니다.
+@Length.userVO.userName = 최소 2글자 이상입니다.

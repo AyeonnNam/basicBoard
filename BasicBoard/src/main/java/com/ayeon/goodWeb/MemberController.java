@@ -1,9 +1,19 @@
 package com.ayeon.goodWeb;
 
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,28 +37,45 @@ public class MemberController {
 	private PasswordEncoder encoder;
 	
 	
+	
+	
 	@GetMapping("/join")
-	public void join() {	
+	public void join(@ModelAttribute MemberVO memberVO, Model model) {	
+		
+		
 		
 	}
+	
 	
 	//회원가입시 비밀번호 암호화 
-	@PostMapping("/join")
-	public String join(MemberVO member, AuthVO auth, RedirectAttributes rttr ) {
-		
 	
+	@PostMapping("/join")
+	public String join(  @Valid MemberVO memberVO, BindingResult bindingResult, AuthVO auth
+			) {
+		
+		
+		if(bindingResult.hasErrors()) {
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            for(ObjectError error : errors){
+                log.info("errors - - - - - - - : " +  error);
+            }
+            return "join";
+        }
+		
 		String rawPw = "";
 		String encodePw = "";
-		rawPw = member.getUserpw();
+		rawPw = memberVO.getUserpw();
 		encodePw = encoder.encode(rawPw);
-		member.setUserpw(encodePw);
-		service.memberJoin(member);
+		memberVO.setUserpw(encodePw);
+		service.memberJoin(memberVO);
+		log.info( " - - - ----- - - -- : member : ------   - - -  - - - - "  + memberVO);
 		service.memberAuth(auth);
-		rttr.addFlashAttribute("result", member.getUserid());
 		
-		log.info(" == JOIN SUCCESS ==  " + member );
-		return "redirect:/board/list";
-	}
+        return "redirect:/board/list";
+    }
+		
+		
+		
 	
 	@PostMapping("/memberIdChk")
 	@ResponseBody

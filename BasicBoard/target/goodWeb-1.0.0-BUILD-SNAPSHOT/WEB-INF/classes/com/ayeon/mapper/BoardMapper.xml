@@ -1,0 +1,127 @@
+<?xml  version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ayeon.mapper.BoardMapper">
+
+
+	<!-- <select id="listWithPaging" resultType="com.ayeon.domain.BoardVO"> 
+		select r1.* from (select * from tbl_board order by bno DESC) r1 LIMIT #{amount} 
+		OFFSET #{skip} </select> -->
+
+	<sql id="criteriaForListWithPaging">
+		<trim prefix="where (" suffix=") " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like concat('%',#{keyword},'%')
+						</when>
+						<when test="type == 'C'.toString()">
+							content like concat('%',#{keyword},'%')
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like concat('%',#{keyword},'%')
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<sql id="criteriaForTotalCount">
+		<trim prefix=" (" suffix=") and " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like concat('%',#{keyword},'%')
+						</when>
+						<when test="type == 'C'.toString()">
+							content like concat('%',#{keyword},'%')
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like concat('%',#{keyword},'%')
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<select id="listWithPaging"
+		resultType="com.ayeon.domain.BoardVO">
+		<![CDATA[ select * from tbl_board]]>
+		<include refid="criteriaForListWithPaging"></include>
+		<![CDATA[ order by bno desc limit #{amount} offset #{skip} ]]>
+	</select>
+
+
+
+
+
+	<select id="getTotalCount" resultType="int">
+		<![CDATA[select count(*) from tbl_board where]]>
+		<include refid="criteriaForTotalCount"></include>
+		
+		<![CDATA[ bno > 0]]>
+		 
+		
+		
+	</select>
+
+
+	<select id="getList" resultType="com.ayeon.domain.BoardVO">
+  <![CDATA[select * from tbl_board where bno > 0]]>
+
+	</select>
+
+	<insert id="insert">
+		insert into tbl_board (bno, title, content, writer)
+		values ((select
+		nextval('seq_board') from dual), #{title}, #{content},
+		#{writer})
+
+	</insert>
+
+
+	<insert id="insertSelectKey">
+
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long">
+			select nextval('seq_board') from dual
+
+		</selectKey>
+
+		insert into tbl_board (bno, title, content, writer)
+		values(#{bno},#{title},#{content},#{writer})
+
+
+	</insert>
+
+	<select id="read" resultType="com.ayeon.domain.BoardVO">
+		select * from tbl_board where bno =
+		#{bno}
+
+	</select>
+
+	<delete id="delete">
+		delete from tbl_board where bno =#{bno}
+
+	</delete>
+
+	<update id="update">
+		update tbl_board set title=#{title},
+		content =
+		#{content},
+		writer=#{writer},
+		updateDate = now()
+		where bno = #{bno}
+
+	</update>
+	
+	<update id="updateReplyCnt">
+		update tbl_board set replyCnt = replyCnt + #{amount} where bno = #{bno}
+	</update>
+
+</mapper>

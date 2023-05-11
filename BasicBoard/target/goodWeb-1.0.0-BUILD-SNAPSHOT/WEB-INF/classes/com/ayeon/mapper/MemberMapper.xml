@@ -1,0 +1,47 @@
+<?xml  version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ayeon.mapper.MemberMapper">
+	<resultMap type="com.ayeon.domain.MemberVO" id="memberMap">
+		<id property="userid" column="userid" />
+		<result property="mno" column="mmo"/>
+		<result property="userid" column="userid" />
+		<result property="userpw" column="userpw" />
+		<result property="userName" column="userName" />
+		<result property="regDate" column="regDate" />
+		<result property="updateDate" column="updateDate" />
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+
+	<resultMap type="com.ayeon.domain.AuthVO" id="authMap">
+		<result property="userid" column="userid" />
+		<result property="auth" column="auth" />
+	</resultMap>
+	
+	<select id="read" resultMap="memberMap">
+		select mem.userid, userpw, username, enabled, regdate, updateDate, auth, mno
+		from tbl_member mem left outer join tbl_member_auth auth on mem.userid= auth.userid
+		 where mem.userid = #{userid}
+	</select>
+
+
+
+
+
+	<insert id="insert">
+  		insert into tbl_member (mno, userid, userpw, userName, enabled) values((SELECT nextval('sec_member') FROM DUAL),#{userid},#{userpw},#{userName},1)
+	</insert>
+	
+	<insert id="insertAuth">	
+		insert into tbl_member_auth (userid, auth) values(#{userid}, 'ROLE_USER')
+	</insert>
+
+	<!-- resultType 명시 주의 -->
+	<select id="idCheck" resultType= "int">
+	select count(*) from tbl_member where userid = #{userid};
+	</select>
+
+
+</mapper> 
+  

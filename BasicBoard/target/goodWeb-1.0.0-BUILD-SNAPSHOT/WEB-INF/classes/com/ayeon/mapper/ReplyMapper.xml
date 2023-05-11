@@ -1,0 +1,66 @@
+<?xml  version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ayeon.mapper.ReplyMapper">
+
+	<insert id="insert">
+		insert into tbl_reply (rno, bno, reply, replyer)
+		values ((select nextval('seq_reply') from dual),
+		#{bno},#{reply},#{replyer})
+	</insert>
+
+	<select id="read" resultType="com.ayeon.domain.ReplyVO">
+		select * from tbl_reply where rno =
+		#{rno}
+	</select>
+
+	<update id="update">
+		update tbl_reply set reply = #{reply},
+		updateDate =
+		current_timestamp where rno = #{rno}
+
+	</update>
+
+	<delete id="delete">
+		delete from tbl_reply where rno = #{rno}
+	</delete>
+
+	<!-- <select id="getListWithPaging" resultType="com.ayeon.domain.ReplyVO"> 
+		select rno, bno, reply, replyer, replyDate, updateDate from tbl_reply where 
+		bno = #{bno} order by rno asc </select> -->
+
+	<select id="getListWithPaging"
+		resultType="com.ayeon.domain.ReplyVO">
+			
+				<![CDATA[
+				
+				
+				select rno, bno, reply, replyer, replyDate, updateDate from (
+            select /*index(tbl_reply idx_reply)*/ 
+            (SELECT @ROWNUM := @ROWNUM + 1 AS RN), bno, rno, reply, replyer, replyDate, updateDate 
+            from tbl_reply, (SELECT @ROWNUM := 0) AS ROWCOLUMN 
+            where bno = #{bno} and rno > 0) as t 
+            limit #{cri.amount}  offset #{cri.skip};
+				
+				
+				
+				]]>
+
+	</select>
+
+	<select id="getCountByBno" resultType="int">
+			<![CDATA[
+			
+					select count(rno) from tbl_reply where bno = #{bno};
+			
+			]]>
+
+	</select>
+
+
+
+
+
+
+</mapper>
