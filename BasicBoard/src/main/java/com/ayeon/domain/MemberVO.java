@@ -3,8 +3,11 @@ package com.ayeon.domain;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
+@Component
 @Data
 public class MemberVO {
 	

@@ -27,15 +27,15 @@
                     		<form:input path="userid" id="id_input" class="form-control" name="userid" placeholder="아이디"/>
                     		 <span class="id_input_re_1">사용 가능한 아이디입니다.</span>
                                    <span class="id_input_re_2">이미 이용 중인 아이디입니다.</span>
-                                   <form:errors path="userid"/>
+                                   <small><form:errors path="userid" cssClass="errormsg"/></small>
                     	</div>
                     <div class="form-group">
                     		<form:input path="userpw"  class="form-control" name="userpw" placeholder="비밀번호"/>
-                    		       <form:errors path="userpw"/>
+                                   <small><form:errors path="userpw" cssClass="errormsg"/></small>
                     	</div>
                     	<div class="form-group">
                     		<form:input path="userName"  class="form-control" name="userName" placeholder="이름"/>
-                    		       <form:errors path="userName"/>
+                                   <small><form:errors path="userName" cssClass="errormsg"/></small>
                     	</div>
                     	
                                 <button type="submit" class="btn btn-success" >JOIN</button>  
@@ -99,7 +99,7 @@
 		display : none;
 			
 	}
-	.error {
+	.errormsg {
 		color: red;
 	}
 	
